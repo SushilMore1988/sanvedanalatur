@@ -1,0 +1,26 @@
+footer{
+	// .footer-first{
+		.navbar-brand{
+			img{
+					width: 151px;
+					height: auto;			
+				}
+			}
+		ul{
+			li{
+				list-style-type: none;
+				padding-bottom: 0.5rem;
+			}
+		}
+		.logo-image{
+			width: 100px;
+		}
+		address{
+			width: 100%;
+		}
+		.navbar-brand{
+			line-height: 1;
+			text-transform: uppercase;
+		}
+	// }
+}

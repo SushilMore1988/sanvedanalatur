@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="70" height="70" viewBox="0 0 70 70">
+  <defs>
+    <filter id="Ellipse_14" x="0" y="0" width="70" height="70" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Group_731" data-name="Group 731" transform="translate(-322 -189)">
+    <g transform="matrix(1, 0, 0, 1, 322, 189)" filter="url(#Ellipse_14)">
+      <g id="Ellipse_14-2" data-name="Ellipse 14" transform="translate(9 6)" fill="#fff" stroke="#c9c9c9" stroke-width="1">
+        <circle cx="26" cy="26" r="26" stroke="none"/>
+        <circle cx="26" cy="26" r="25.5" fill="none"/>
+      </g>
+    </g>
+    <path id="Icon_material-mode-edit" data-name="Icon material-mode-edit" d="M4.5,24.356v5.225H9.725L25.136,14.17,19.911,8.945ZM29.177,10.129a1.388,1.388,0,0,0,0-1.965L25.917,4.9a1.388,1.388,0,0,0-1.965,0L21.4,7.454l5.225,5.225,2.55-2.55Z" transform="translate(340.419 202.504)" fill="#454545"/>
+  </g>
+</svg>

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="63.786" height="55.813" viewBox="0 0 63.786 55.813">
+  <g id="Group_723" data-name="Group 723" transform="translate(-181 -1487)">
+    <g id="Group_721" data-name="Group 721" transform="translate(181 1487)">
+      <g id="Ellipse_13" data-name="Ellipse 13" transform="translate(13.5 15.812)" fill="#ff0" stroke="#707070" stroke-width="1">
+        <circle cx="18.5" cy="18.5" r="18.5" stroke="none"/>
+        <circle cx="18.5" cy="18.5" r="18" fill="none"/>
+      </g>
+      <path id="Icon_awesome-camera" data-name="Icon awesome-camera" d="M63.786,16.2V52.083a5.981,5.981,0,0,1-5.98,5.98H5.98A5.981,5.981,0,0,1,0,52.083V16.2a5.981,5.981,0,0,1,5.98-5.98H16.943l1.532-4.1A5.972,5.972,0,0,1,24.069,2.25H39.7A5.972,5.972,0,0,1,45.3,6.124l1.545,4.1H57.806A5.981,5.981,0,0,1,63.786,16.2ZM46.843,34.143a14.95,14.95,0,1,0-14.95,14.95A14.962,14.962,0,0,0,46.843,34.143Zm-3.987,0A10.963,10.963,0,1,1,31.893,23.18,10.979,10.979,0,0,1,42.856,34.143Z" transform="translate(0 -2.25)" fill="#454545"/>
+    </g>
+    <g id="Rectangle_179" data-name="Rectangle 179" transform="translate(186.5 1490.813)" fill="#ff0" stroke="#454545" stroke-width="0.7">
+      <rect width="9" height="5" stroke="none"/>
+      <rect x="0.35" y="0.35" width="8.3" height="4.3" fill="none"/>
+    </g>
+  </g>
+</svg>

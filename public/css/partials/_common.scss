@@ -1,0 +1,389 @@
+body{
+	padding:0px;
+	margin:0px;
+	font-family: 'Poppins-Medium', sans-serif;
+	// overflow: hidden;
+}
+@mixin font($font-family,$font-file,$font-weight) {
+	@font-face{
+		font-family:$font-family;
+		src:url($font-file + '.ttf');
+		font-weight: $font-weight;
+	}
+}
+@mixin translate($translateX,$translateY){
+	-webkit-transform: translate($translateX, $translateY);
+	-moz-transform: translate($translateX, $translateY);
+	-ms-transform: translate($translateX, $translateY);
+	-o-transform: translate($translateX, $translateY);
+	transform: translate($translateX, $translateY);
+}
+@mixin transform($property){
+	-webkit-transform: $property;
+	-moz-transform: $property;
+	-ms-transform: $property;
+	-o-transform: $property;
+	transform: $property;
+}
+// @mixin transition($second){
+// 	-webkit-transition: $second;
+// 	-moz-transition: $second;
+// 	-ms-transition: $second;
+// 	-o-transition: $second;
+// 	 transition: $second;
+// }
+@mixin transition($transition...) {
+    -moz-transition:    $transition;
+    -o-transition:      $transition;
+    -ms-transition: 	$transition;
+    -webkit-transition: $transition;
+    transition:         $transition;
+}
+@mixin transition-property($property...) {
+    -moz-transition-property:    $property;
+    -o-transition-property:      $property;
+    -webkit-transition-property: $property;
+    transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+    -moz-transition-property:    $duration;
+    -o-transition-property:      $duration;
+    -webkit-transition-property: $duration;
+    transition-property:         $duration;
+}
+@mixin transition-timing-function($timing...) {
+    -moz-transition-timing-function:    $timing;
+    -o-transition-timing-function:      $timing;
+    -webkit-transition-timing-function: $timing;
+    transition-timing-function:         $timing;
+}
+
+@include font('NunitoSans-Bold','./fonts/Nunito_Sans/NunitoSans-Bold',700);
+@include font('NunitoSans-Regular','./fonts/Nunito_Sans/NunitoSans-Regular',400);
+@include font('NunitoSans-SemiBoldItalic','./fonts/Nunito_Sans/NunitoSans-SemiBoldItalic',600);
+@include font('Poppins-Black', './fonts/poppins/Poppins-Black', 900);
+@include font('Poppins-Bold', './fonts/poppins/Poppins-Bold', 700);
+@include font('Poppins-SemiBoldItalic', './fonts/poppins/Poppins-SemiBoldItalic', 600);
+@include font('Poppins-SemiBold', './fonts/poppins/Poppins-SemiBold', 600);
+@include font('Poppins-Medium', './fonts/poppins/Poppins-Medium', 500);
+@include font('Poppins-Regular', './fonts/poppins/Poppins-Regular', 400);
+@include font('Poppins-Light', './fonts/poppins/Poppins-Light', 300);
+@include font('Poppins-LightItalic', './fonts/poppins/Poppins-LightItalic', 300);
+
+//font-family-classess//
+.n-bold{
+	font-family: 'NunitoSans-Bold', sans-serif;
+}
+.n-regular{
+	font-family: 'NunitoSans-Regular', sans-serif;
+}
+.n-semiBold{
+	font-family: 'NunitoSans-SemiBoldItalic', sans-serif;
+}
+.p-black{
+	font-family: 'Poppins-Black', sans-serif;
+}
+.p-bold{
+	font-family: 'Poppins-Bold', sans-serif;
+}
+.p-semibold{
+	font-family: 'Poppins-SemiBold', sans-serif;
+}
+.p-semiboldItalic{
+	font-family: 'Poppins-SemiBoldItalic', sans-serif;
+}
+.p-medium{
+	font-family: 'Poppins-Medium', sans-serif;
+}
+.p-regular{
+	font-family: 'Poppins-Regular', sans-serif;
+}
+.p-light{
+	font-family: 'Poppins-Light', sans-serif;
+}
+.p-lightItalic{
+	font-family: 'Poppins-LightItalic', sans-serif;
+}
+//end-font-family-classess//
+
+//rounded//
+.rounded-9{
+	border-radius:9px !important;
+}
+.rounded-12{
+	border-radius:12px;
+}
+.rounded-15{
+	border-radius:15px;
+}
+//end-rounded//
+
+//font-size//
+.f-12{
+	font-size: 12px;
+}
+.f-13{
+	font-size: 13px;
+}
+
+.f-14{
+	font-size: 14px;	
+}
+.f-16{
+	font-size: 16px;
+}
+.f-18{
+	font-size: 18px;
+}
+.f-20{
+	font-size: 20px;
+}
+.f-22{
+	font-size: 22px;
+}
+.f-25{
+	font-size: 25px;
+}
+.f-36{
+	font-size: 36px;
+}
+a{
+	&:hover{
+		text-decoration: none;
+	}
+}
+//end-font-size//
+
+//utilities//
+.common-mt{
+	margin-top: 72px;
+}
+// .register-mt{
+// 	margin-top: 54px;
+// }
+.background-none{
+	background:none !important;
+}
+
+//end-utilities//
+
+
+
+//btn//
+.btn{
+	padding: 0.575rem 1.8rem;
+}
+.table-responsive{
+	display: table;
+}
+
+//end-btn//
+
+//custome-radio//
+.radio-wrapper {
+ 	display: block;
+ 	position: relative;
+  	padding-left: 25px;
+  	margin-bottom: 9px;
+  	cursor: pointer;
+  	-webkit-user-select: none;
+  	-moz-user-select: none;
+  	-ms-user-select: none;
+  	user-select: none;
+  	input {
+	  position: absolute;
+	  opacity: 0;
+	  cursor: pointer;
+	}
+	
+	.checkmark-check {
+	  	position: absolute;
+	  	top: 2px;
+	  	left: 0;
+	  	height: 16px;
+	  	width: 16px;
+	  	background-color: #fff;
+	  	border: 1px solid #707070;
+	  	// border-radius: 50%;
+	  	&:after {
+		  	content: "";
+		  	position: absolute;
+		  	// display: none;
+		  	top: 2px;
+			left: 2px;
+			width: 10px;
+			height: 10px;
+			// border-radius: 50%;
+			background:#fff;
+			display: block;
+		}
+	}
+	input:checked ~ .checkmark-check {
+	  background-color: #fff;
+	}
+	input:checked ~ .checkmark-check:after {
+	  // display: block;
+	  background:#020202;
+	}
+	&:hover input ~ .checkmark-check{
+		  background-color: #fff;
+	}
+
+}
+.radio-wrapper-2 {
+ 	display: block;
+ 	position: relative;
+  	padding-left: 23px;
+  	margin-bottom: 9px;
+  	cursor: pointer;
+  	-webkit-user-select: none;
+  	-moz-user-select: none;
+  	-ms-user-select: none;
+  	user-select: none;
+  	input {
+	  position: absolute;
+	  opacity: 0;
+	  cursor: pointer;
+	}
+	input:checked ~ .checkmark {
+	  background-color: #fff;
+	}
+	input:checked ~ .checkmark:after {
+	  // display: block;
+	  background:#000000;
+	}
+	.checkmark {
+	  	position: absolute;
+	  	top: 2px;
+	  	left: 0;
+	  	height: 16px;
+	  	width: 16px;
+	  	background-color: #fff;
+	  	border: 1px solid #707070;
+	  	border-radius: 50%;
+	  	&:after {
+		  	content: "";
+		    position: absolute;
+		    top: 2px;
+		    left: 2px;
+		    width: 10px;
+		    height: 10px;
+		    border-radius: 50%;
+		    border: 1px solid #707070;
+		    background: #fff;
+		    display: block;
+		}
+	}
+	&:hover input ~ .checkmark{
+		  background-color: #fff;
+	}
+}
+.custom-select{
+    background: url("../img/Icon ionic-ios-arrow-down.svg") no-repeat right 0.5rem center/13px 10px !important;
+    background-color:#fff !important;
+    text-indent: 5px;
+    -webkit-appearance: none;
+
+    option{
+        min-height: 2em;
+        padding:30px;
+        &:hover{
+            background-color:#151515;
+        }
+    }
+}
+.form-control{
+	&:focus{
+		outline: 0px;
+		box-shadow:none;
+	}
+}
+.input-group{
+	.input-group-append{
+		z-index: 55;
+	}
+}
+.verified-check{
+	width: 25px;
+}
+.btn-success{
+	&:hover {
+	    color: #fff;
+	    background-color: rgba(45, 160, 54, 0.72) !important;
+	    border-color: #fff;
+	}
+}
+//end-custome-radio//
+.slick-slider {
+	.slick-track{
+		&:focus{
+			outline: 0px;
+		}
+	}
+	.slick-slide{
+		&:focus{
+			outline: 0px;
+		}
+	}
+}
+.head{
+	position: relative;
+	&:after{
+		position: absolute;
+		bottom: -4px;
+		left: 50%;
+		transform:translateX(-50%);
+		content: "";
+		display: block;
+		width: 45%;
+		height: 5px;
+		background-color: $primary;
+	}
+}
+
+.btn.btn-light {
+    background-color: #ffffff;
+    border-color: #ebebeb;
+    color: #4c5667;
+    font-size: 14px;
+    font-family: 'Poppins-Regular', sans-serif;
+}
+
+.add-item-wrapper{
+			// .badge::first-child{
+			// 	border:top:
+			// }
+			.badge{
+				width: 100%;
+				display: flex;
+				justify-content: space-between ;
+				background-color: white;
+				// border: 1px solid #D8D8D8;
+				border: 0px;
+				font-family: 'Poppins-Regular', sans-serif;
+				font-weight: 400;
+				color: #696969;
+				font-size: 14px;
+				border-radius: 9px;
+				padding: 0.6rem 0.85rem;
+				margin: 0px !important;
+				&:hover{
+					background-color: #EFEFEF;
+				}
+				.closelabel{
+					position: relative;
+					&::after{
+						font-family: "Font Awesome 5 Free";
+					   content: "\f2ed";
+					   display: inline-block;
+					   padding-right: 3px;
+					   vertical-align: middle;
+					   font-weight: 900;
+				  		position: absolute;
+				  		right: -5px;
+				  		top: 0px;
+					}
+					
+				}
+			}
+		}

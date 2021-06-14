@@ -1,0 +1,33 @@
+.labelinput, .labelinput:focus { 
+	border: 1px solid #ced4da; 
+	outline: none;
+	margin: 5px 0px;
+	padding: 0px 5px;
+}
+
+.tagLabel {
+	margin: 0 4px 4px 0; 
+	font-size: 100%;
+}
+.closelabel{
+	color: rgba(0,0,0,0.75);
+}
+.closelabel:hover{
+	color: rgba(0,0,0,0.75);
+	text-decoration: none;
+}
+.tagLabel{
+	background-color: #fafafa;
+	color: rgba(0,0,0,0.75);
+	border: 1px solid #dcdcdc;
+	font-size: 80%;
+	font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    padding: 7px 9px;
+}
+.tags{
+	height: auto;
+}
+.labelinput{
+	width: 100%;
+}

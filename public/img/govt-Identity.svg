@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="43.348" height="57.797" viewBox="0 0 43.348 57.797">
+  <g id="Group_729" data-name="Group 729" transform="translate(-792.807 -1532.743)">
+    <g id="Rectangle_182" data-name="Rectangle 182" transform="translate(797 1548)" fill="#ffb18d" stroke="#707070" stroke-width="1">
+      <rect width="36" height="39" stroke="none"/>
+      <rect x="0.5" y="0.5" width="35" height="38" fill="none"/>
+    </g>
+    <path id="Icon_awesome-id-badge" data-name="Icon awesome-id-badge" d="M37.929,0H5.418A5.42,5.42,0,0,0,0,5.418v46.96A5.42,5.42,0,0,0,5.418,57.8H37.929a5.42,5.42,0,0,0,5.418-5.418V5.418A5.42,5.42,0,0,0,37.929,0ZM16.255,3.612H27.092a1.806,1.806,0,0,1,0,3.612H16.255a1.806,1.806,0,0,1,0-3.612Zm5.418,14.449a7.225,7.225,0,1,1-7.225,7.225A7.231,7.231,0,0,1,21.674,18.062ZM34.317,44.793a2.367,2.367,0,0,1-2.529,2.167H11.559a2.367,2.367,0,0,1-2.529-2.167V42.625c0-3.59,3.4-6.5,7.586-6.5h.564a11.627,11.627,0,0,0,8.986,0h.564c4.188,0,7.586,2.912,7.586,6.5Z" transform="translate(792.807 1532.743)" fill="#454545"/>
+  </g>
+</svg>
