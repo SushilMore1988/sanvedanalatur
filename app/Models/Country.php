@@ -9,8 +9,20 @@ class Country extends Model
 {
     use HasFactory;
 
+    /**
+     * The roles that belong to the user.
+     */
+    protected $fillable = [
+        'name',
+    ];
+
     public function states()
     {
         return $this->hasMany('App\Models\State');
+    }
+
+    public function area()
+    {
+        return $this->morphOne(User::class, 'areable');
     }
 }

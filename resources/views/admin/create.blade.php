@@ -20,6 +20,6 @@
         </div>
     </div>
     
-    @livewire('create-admin')
+    @livewire('create-admin', ['roles' => $roles])
 
 </x-auth-layout>

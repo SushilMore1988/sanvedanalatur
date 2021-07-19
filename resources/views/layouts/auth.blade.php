@@ -22,11 +22,13 @@
         }
     </style>
     {{ $style }}
+    @stack('styles')
+    
     @livewireStyles
 </head>
 <body>
-    <header class="home-header fixed-top bg-white" >
-        <div class="container-fluid ">
+    <header class="home-header fixed-top bg-white">
+        <div class="container-fluid">
             <nav class="navbar px-0 justify-content-between align-items-center">
                 <a class="navbar-brand p-semibold text-primary text-left" href="{{route('home')}}"> 
                     <img src="{{url('img/logoeng.png')}}" class="img-fluid">
@@ -35,6 +37,7 @@
                 <ul class="navbar-nav flex-row align-items-center d-md-flex d-none">
                     <li class="nav-item dropdown">
                         <a class="nav-link p-medium f-14 text-nav-color dropdown-toggle px-lg-3 px-md-2 pl-sm-4 pl-3 " href="#" id="navbarDropdown" data-toggle="dropdown" >
+                            {{ Auth::user()->name }}
                         <i class="fas fa-user-circle fs-25"></i>
                         </a>
                         <div class="dropdown-menu position-absolute dropdown-menu-right border-0 py-0" >
@@ -55,23 +58,12 @@
             </nav>
         </div>
     </header>
-    {{-- <section class="register-mt position-relative common-mt ">
-        <div class="container">
-            <div class="register-create d-flex flex-column justify-content-center">
-                <div class="align-self-center w-100">
-                    <div class="register-banner d-flex flex-column justify-content-center background-none">
-                        {{ $slot }}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section> --}}
     <section class="common-mt unic-table">
-        <div class="d-flex" id="wrapper">
-            
-            <div class="border-right" id="sidebar-wrapper">
+        <div class="d-flex toggled" id="wrapper">
+            <div class="border-right toggled" id="sidebar-wrapper">
                 <div class="list-group list-group-flush">
                     <ul class="pl-0 accordion" id="accordion">
+                        @can('home')
                         <li>
                             <div class="media">
                                 <i class="fas fa-home mr-3 align-selft-center "></i> 
@@ -82,6 +74,8 @@
                                 </div>
                             </div>
                         </li>
+                        @endcan
+                        @can('role-list')
                         <li>
                             <div class="media">
                                 <i class="fas fa-user mr-3"></i> 
@@ -92,6 +86,8 @@
                                 </div>
                             </div>
                         </li>
+                        @endcan
+                        @can('permission-list')
                         <li>
                             <div class="media">
                                 <i class="fas fa-user mr-3"></i> 
@@ -102,6 +98,20 @@
                                 </div>
                             </div>
                         </li>
+                        @endcan
+                        @can('divyang-list')
+                        <li>
+                            <div class="media">
+                                <i class="fas fa-user mr-3"></i> 
+                                <div class="media-body">
+                                    <a href="{{route('divyang.index')}}" class="list-group-item ">
+                                        <p class=" p-semibold f-14 mb-0">Divyang List</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        @endcan
+                        @can('admin-list')
                         <li>
                             <div class="media">
                                 <i class="fas fa-user mr-3"></i> 
@@ -112,54 +122,373 @@
                                 </div>
                             </div>
                         </li>
+                        @endcan
+                        @can('ahwal-list')
                         <li>
                             <div class="media">
                                 <i class="far fa-file-alt mr-3"></i> 
                                 <div class="media-body">
-                                    <div class="collapsed heading list-group-item " data-toggle="collapse" href="#collapseAhwal">
+                                    <div class="collapsed heading list-group-item " data-toggle="collapse" href="#collapseDivyangFields">
                                         <p class=" p-semibold f-14 mb-0"> Ahwal</p>
                                     </div>
                                 </div>
                             </div>
-                            <div id="collapseAhwal" class="collapse pl-3" data-parent="#accordion">
-                                <ul class="pl-5">
-                                    {{-- <li class="pb-2">
-                                        <a href="{{route('super-admin.education-wise-list')}}" class="text-primary  p-medium f-14"> Education Wise List</a>
+                            <div id="collapseDivyangFields" class="collapse pl-3" data-parent="#accordion">
+                                <ul class="pl-0">
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.education')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Education Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="pb-2">
-                                        <a href="{{route('super-admin.caste-wise-list')}}" class="text-primary  p-medium f-14">Caste Wise List</a>
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.caste')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Caste Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="pb-2">
-                                        <a href="{{route('super-admin.marital-status-wise-list')}}" class="text-primary  p-medium f-14">Marital Status Wise List</a>
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.marital-status')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Marital Status Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="pb-2">
-                                        <a href="{{route('super-admin.poverty-line-wise-list')}}" class="text-primary  p-medium f-14">  Poverty Line Wise List</a>
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.poverty-line')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Poverty Line Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="pb-2">
-                                        <a href="{{route('super-admin.ST-pass-wise-list')}}" class="text-primary  p-medium f-14"> S.T travel pass Wise List</a>
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.st-pass')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">S.T. Pass Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="pb-2">
-                                        <a href="{{route('super-admin.goverment-scheme-wise-list')}}" class="text-primary  p-medium f-14"> Government Scheme Advantage Wise List</a>
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.gov-scheme')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Government Schemes Advantage Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="pb-2">
-                                        <a href="{{route('super-admin.personal-toilet-wise-list')}}" class="text-primary  p-medium f-14"> Personal Toilet Availability Wise List</a>
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.personal-toilet')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Personal Toilet Availability Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
                                     </li>
-                                    <li class="pb-2">
-                                        <a href="{{route('super-admin.home-wise-list')}}" class="text-primary  p-medium f-14"> Home Availability Wise List</a>
-                                    </li> --}}
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('ahwal.home')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Home Availability Wise List</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
+                        @endcan
+                        @canany(['disability-type-list', 'disability-area-list', 'disability-reason-list', 'divyang-goods-list', 'identity-proof-list', 'address-proof-list', 'hospital-list', 'occupation-list'])
+                        <li>
+                            <div class="media">
+                                <i class="far fa-file-alt mr-3"></i> 
+                                <div class="media-body">
+                                    <div class="collapsed heading list-group-item " data-toggle="collapse" href="#collapseDivyangFields">
+                                        <p class=" p-semibold f-14 mb-0"> Divyang Fields</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapseDivyangFields" class="collapse pl-3" data-parent="#accordion">
+                                <ul class="pl-0">
+                                    @can('disability-type-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('disability-types.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Disability Types</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('disability-area-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('disability-areas.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Disability Areas</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('disability-reason-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('disability-reasons.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Disability Reasons</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('divyang-goods-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('divyang-goods.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Divyang Goods</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('identity-proof-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('identity-proofs.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Identity Proofs</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('address-proof-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('address-proofs.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Address Proofs</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('hospital-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('hospitals.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Hospitals</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('occupation-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('occupations.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Occupations</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                </ul>
+                            </div>
+                        </li>
+                        @endcanany
+                        <li>
+                            <div class="media">
+                                <i class="far fa-file-alt mr-3"></i> 
+                                <div class="media-body">
+                                    <div class="collapsed heading list-group-item " data-toggle="collapse" href="#collapseAddressFields">
+                                        <p class=" p-semibold f-14 mb-0">Address Fields</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapseAddressFields" class="collapse pl-3" data-parent="#accordion">
+                                <ul class="pl-0">
+                                    @can('country-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('country.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Countries</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('state-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('states.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">States</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('district-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('districts.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Districts</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('taluka-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('talukas.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Talukas</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('village-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('villages.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Villages</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    {{-- @can('city-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('cities.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Cities</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan --}}
+                                    @can('mahanagarpalika-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('mahangarpalikas.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Mahangarpalikas</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('mahanagarpalika-zone-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('mahangarpalika-zones.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Mahangarpalika Zones</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('mahanagarpalika-ward-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('mahangarpalika-wards.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Mahangarpalika Wards</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('nagarparishad-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('nagarparishads.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Nagarparishads</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                    @can('nagarparishad-ward-list')
+                                    <li>
+                                        <div class="media py-0">
+                                            <i class="fas fa-user pt-2"></i> 
+                                            <div class="media-body">
+                                                <a href="{{route('nagarparishad-wards.index')}}" class="list-group-item ">
+                                                    <p class=" p-semibold f-14 mb-0">Nagarparishad Wards</p>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    @endcan
+                                </ul>
+                            </div>
+                        </li>
+                        {{-- @can('') --}}
                         <li>
                             <div class="media">
                                 <i class="fas fa-user mr-3"></i> 
                                 <div class="media-body">
-                                    {{-- <a href="{{route('home-page-scheme')}}" class="list-group-item ">
-                                        <p class=" p-semibold f-14 mb-0">Home Page Setting</p>
-                                    </a> --}}
+                                    <a href="{{route('nagarparishad-wards.index')}}" class="list-group-item ">
+                                        <p class=" p-semibold f-14 mb-0">Settings</p>
+                                    </a>
                                 </div>
                             </div>
                         </li>
+                        {{-- @endcan --}}
                     </ul>
                 </div>
             </div>
@@ -181,6 +510,7 @@
     
     @livewireScripts
     {{ $javascript }}
+    @stack('scripts')
     <script>
         $("#menu-toggle").click(function(e) {
           e.preventDefault();

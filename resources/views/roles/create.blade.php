@@ -51,8 +51,8 @@
                     'Taluka' => 'Taluka', 
                     'Village' => 'Village', 
                     'City' => 'City', 
-                    'Zone' => 'Zone', 
                     'Mahanagarpalika' => 'Mahanagarpalika', 
+                    'Zone' => 'Zone', 
                     'MahanagarpalikaWardNumber' => 'MahanagarpalikaWardNumber', 
                     'Nagarparishad' => 'Nagarparishad', 
                     'NagarparishadWardNumber' => 'NagarparishadWardNumber'

@@ -15,7 +15,7 @@ class CreateNagarparishadsTable extends Migration
     {
         Schema::create('nagarparishads', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('district_id')->unsigned();
+            $table->bigInteger('taluka_id')->unsigned();
             $table->string('name');
             $table->timestamps();
         });

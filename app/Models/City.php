@@ -23,4 +23,9 @@ class City extends Model
     {
         return $this->belongsTo('App\Models\Taluka');
     }
+
+    public function area()
+    {
+        return $this->morphOne(User::class, 'areable');
+    }
 }

@@ -60,9 +60,16 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
+            <strong>Select roles whose data can see:</strong>
+            {!! Form::select('roles[]', $roles, $selectedRoles, array('multiple' => true, 'class' => 'form-control')) !!}
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
             <strong>Permission:</strong>
             <br/>
-            @foreach($permission as $value)
+           
+           @foreach($permission as $value)
                 <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
                 {{ $value->name }}</label>
             <br/>

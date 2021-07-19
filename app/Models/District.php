@@ -9,6 +9,10 @@ class District extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'state_id',
+    ];
+
     public function state()
     {
         return $this->belongsTo('App\Models\State');
@@ -32,5 +36,10 @@ class District extends Model
     public function mahanagarpalikas()
     {
         return $this->hasMany('App\Models\Mahanagarpalika');
+    }
+
+    public function area()
+    {
+        return $this->morphOne(User::class, 'areable');
     }
 }

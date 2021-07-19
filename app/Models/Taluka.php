@@ -9,6 +9,10 @@ class Taluka extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'district_id',
+    ];
+
     public function district()
     {
         return $this->belongsTo('App\Models\District');
@@ -24,4 +28,8 @@ class Taluka extends Model
         return $this->hasMany('App\Models\Village');
     }
 
+    public function area()
+    {
+        return $this->morphOne(User::class, 'areable');
+    }
 }

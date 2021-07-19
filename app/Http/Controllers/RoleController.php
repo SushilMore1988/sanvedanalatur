@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use Illuminate\Http\Request;
 use App\Models\Role;
+use App\Models\RoleCanViewData;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Support\Facades\DB;
     
@@ -56,13 +57,14 @@ class RoleController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|unique:roles,name',
-            'area' => 'required',
+            // 'area' => 'required',
             'permission' => 'required',
         ]);
     
         $role = Role::create(['name' => $request->input('name')]);
-
-        $role->area()->create($request->input['area']);
+        if(!empty($request->area)){
+            $role->area()->create([$request->input('area')]);
+        }
 
         $role->syncPermissions($request->input('permission'));
     
@@ -98,8 +100,9 @@ class RoleController extends Controller
         $rolePermissions = DB::table("role_has_permissions")->where("role_has_permissions.role_id",$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
-    
-        return view('roles.edit',compact('role','permission','rolePermissions'));
+        $roles = Role::where('id', '!=', $id)->pluck('name', 'id');
+        $selectedRoles = RoleCanViewData::where('role_id',$id)->pluck('view_role_id');
+        return view('roles.edit',compact('role', 'roles', 'permission','rolePermissions', 'selectedRoles'));
     }
     
     /**
@@ -115,14 +118,23 @@ class RoleController extends Controller
             'name' => 'required',
             'permission' => 'required',
         ]);
-    
+        
         $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
         
         Area::updateOrCreate(['role_id' => $role->id],['name' => $request->input('area')]);
 
+        
         $role->syncPermissions($request->input('permission'));
+        
+        foreach($request->roles as $role)
+        {
+            $roleCanViewData = new RoleCanViewData;
+            $roleCanViewData->role_id = $id;
+            $roleCanViewData->view_role_id = $role;
+            $roleCanViewData->save();
+        }
     
         return redirect()->route('roles.index')
                         ->with('success','Role updated successfully');

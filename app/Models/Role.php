@@ -13,4 +13,9 @@ class Role extends SpatieRole
     {
         return $this->hasOne('App\Models\Area');
     }
+
+    public function viewRoles()
+    {
+        return $this->hasMany('App\Models\RoleCanViewData', 'id');
+    }
 }

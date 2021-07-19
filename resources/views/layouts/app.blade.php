@@ -19,7 +19,7 @@
 	<header class="home-header fixed-top bg-white" >
 		<div class="container px-md-0">
 			<nav class="navbar px-0 justify-content-between align-items-center">
-				<a class="navbar-brand p-semibold text-primary text-left" href="#"> 
+				<a class="navbar-brand p-semibold text-primary text-left" href="{{ url('/') }}"> 
 					<img src="{{url('img/logoeng.png')}}" class="img-fluid">
 				</a>
 				<ul class="navbar-nav flex-row align-items-center d-md-flex d-none">

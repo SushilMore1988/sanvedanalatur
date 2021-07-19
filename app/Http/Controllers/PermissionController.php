@@ -53,7 +53,18 @@ class PermissionController extends Controller
             'name' => 'required|unique:permissions,name',
         ]);
     
-        $role = Permission::create(['name' => $request->input('name')]);
+        $permission = Permission::create([
+                'name' => $request->input('name').'-list'
+        ]);
+        $permission = Permission::create([
+                'name' => $request->input('name').'-create'
+        ]);
+        $permission = Permission::create([
+                'name' => $request->input('name').'-edit'
+        ]);
+        $permission = Permission::create([
+                'name' => $request->input('name').'-delete'
+        ]);
     
         return redirect()->route('permissions.index')
                         ->with('success','Permission created successfully');
@@ -90,5 +101,18 @@ class PermissionController extends Controller
 
         return redirect()->route('permissions.index')
                         ->with('success','Permission updated successfully');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        Permission::find($id)->delete();
+        return redirect()->route('permissions.index')
+                        ->with('success','Permission deleted successfully');
     }
 }

@@ -9,8 +9,17 @@ class NagarparishadWardNumber extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'nagarparishad_id'
+    ];
+    
     public function nagarparishad()
     {
         return $this->belongsTo('App\Models\Nagarparishad');
+    }
+
+    public function area()
+    {
+        return $this->morphOne(User::class, 'areable');
     }
 }

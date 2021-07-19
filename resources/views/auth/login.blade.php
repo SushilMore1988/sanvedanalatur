@@ -23,7 +23,7 @@
     <header class="home-header fixed-top bg-white" >
         <div class="container-fluid ">
             <nav class="navbar px-0 justify-content-between align-items-center">
-                <a class="navbar-brand p-semibold text-primary text-left" href="{{route('home')}}"> 
+                <a class="navbar-brand p-semibold text-primary text-left" href="{{url('/')}}"> 
                     <img src="{{url('img/logoeng.png')}}" class="img-fluid">
                 </a>
             </nav>

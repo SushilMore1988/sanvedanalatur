@@ -36,11 +36,11 @@
                             @can('permission-edit')
                             <a class="btn btn-primary" href="{{ route('permissions.edit',$role->id) }}">Edit</a>
                             @endcan
-                            {{-- @can('permission-delete')
+                            @can('permission-delete')
                             {!! Form::open(['method' => 'DELETE','route' => ['permissions.destroy', $role->id],'style'=>'display:inline']) !!}
                             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                             {!! Form::close() !!}
-                            @endcan --}}
+                            @endcan
                         </td>
                     </tr>
                     @endforeach

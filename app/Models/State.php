@@ -9,6 +9,10 @@ class State extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name', 'country_id'
+    ];
+
     public function country()
     {
         return $this->belongsTo('App\Models\Country');
@@ -22,5 +26,10 @@ class State extends Model
     public function districts()
     {
         return $this->hasMany('App\Models\District');
+    }
+
+    public function area()
+    {
+        return $this->morphOne(User::class, 'areable');
     }
 }
