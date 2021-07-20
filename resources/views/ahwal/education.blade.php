@@ -21,16 +21,26 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $totalArray = [];
+                    @endphp
                     @foreach($disabilityTypes as $disabilityType)
                     <tr>
                         <td>{{ $disabilityType->type }}</td>
                         @php
                             $total = 0;
+                            $i = 0;
                         @endphp
                         @foreach($educations as $education)
                         @php
                             $count = $disabilityType->divyangs->where('education', $education)->count();
                             $total += $count;
+                            if(isset($totalArray[$i])){
+                                $totalArray[$i] += $count;
+                            }else{
+                                $totalArray[$i] = $count;
+                            }
+                            $i++;
                         @endphp
                         @if($count <= 0)
                         <td>{{ $count }}</td>
@@ -38,9 +48,40 @@
                         <td><a href="{{ url("divyang?disability_type=$disabilityType->type&parameter=education&education=$education")}}">{{ $count }}</a></td>
                         @endif
                         @endforeach
-                        <td>{{ $total }}</td>
+                        {{-- <td>{{ $total }}</td> --}}
+                        @if($total <= 0)
+                            <td>{{ $total }}</td>
+                        @else
+                            <td><a href="{{ url("divyang?disability_type=$disabilityType->type")}}">{{ $total }}</a></td>
+                        @endif
                     </tr>
                     @endforeach
+
+                    <tr>
+                        <td>Total</td>
+                        @php
+                            $i = 0;
+                            $grandTotal = 0;
+                        @endphp
+                        @foreach($educations as $education)
+                            {{-- <td>{{ $totalArray[$i] }}</td> --}}
+                            @if($totalArray[$i] <= 0)
+                                <td>{{ $totalArray[$i] }}</td>
+                            @else
+                                <td><a href="{{ url("divyang?parameter=education&education=$education")}}">{{ $totalArray[$i] }}</a></td>
+                            @endif
+                            @php
+                                $grandTotal += $totalArray[$i];
+                                $i++;
+                            @endphp
+                        @endforeach
+                        {{-- <td>{{ $grandTotal }}</td> --}}
+                        @if($grandTotal <= 0)
+                            <td>{{ $grandTotal }}</td>
+                        @else
+                            <td><a href="{{ url("divyang")}}">{{ $grandTotal }}</a></td>
+                        @endif
+                    </tr>
                 
             </table>
         </div>
