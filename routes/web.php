@@ -22,6 +22,7 @@ Auth::routes();
 
 Route::get('/divyang/create', [App\Http\Controllers\DivyangController::class, 'create'])->name('divyang.create');
 Route::post('/divyang/store', [App\Http\Controllers\DivyangController::class, 'store'])->name('divyang.store');
+Route::get('/divyang/singleuser/{id}', [App\Http\Controllers\DivyangController::class, 'singleuser'])->name('divyang.singleuser');
 
 Route::middleware('auth')->group(function () {
 

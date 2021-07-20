@@ -32,7 +32,7 @@
                             $count = $disabilityType->divyangs->where('education', $education)->count();
                             $total += $count;
                         @endphp
-                        <td>{{ $count }}</td>
+                        <td><a href = "/divyang/singleuser/1">{{ $count }}</a></td>
                         @endforeach
                         <td>{{ $total }}</td>
                     </tr>

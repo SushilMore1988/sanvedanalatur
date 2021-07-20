@@ -21,4 +21,10 @@ class DivyangController extends Controller
     {
         return view('divyang.edit', compact('id'));
     }
+
+    public function singleuser($id)
+    {
+        $divyangs = Divyang::find($id);
+        return view('divyang.singleuser', compact('divyangs'));
+    }
 }
