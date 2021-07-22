@@ -49,34 +49,27 @@
                 <input class="" placeholder="search..." name="search" wire:model="search">
             </div>
             <div class="col-lg-12">
-                  <form method="post" enctype="multipart/form-data" action="{{ url('/import_excel/import') }}">
-        {{ csrf_field() }}
-         <tr>
-               <td width="40%" align="right"><label>Select File for Upload</label></td>
-               <td width="30">
-                <input type="file" name="import_file" />
-               </td>
-               <button class="btn btn-success">Import File</button>
-                        <a class="btn btn-info" href="{{ url('export-excel') }}"> 
-                         Export File</a>
-              </tr>
-              <tr>
-               <td width="40%" align="right"></td>
-               <td width="30"><span class="text-muted">.xls, .xslx</span></td>
-               <td width="30%" align="left"></td>
-              </tr>
-        </form>
+                <form method="post" enctype="multipart/form-data" action="{{ url('/import_excel/import') }}">
+                    {{ csrf_field() }}
+                    <label>Select File for Upload</label>
+               
+                    <input type="file" name="import_file" />
+               
+                    <button class="btn btn-success">Import File</button>
+                    <a class="btn btn-info" href="{{ url('export-excel') }}">Export File</a>
+                </form>
                 <table id="datatable" class="table table-bordered table-hover" style="width:100%">
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Country</th>
+                        <th>State</th>
                         <th width="280px">Action</th>
                     </tr>
                     @foreach ($states as $key => $state)
                         <tr>
                         <td>{{ $loop->index+1 + ( ($states->links()->paginator->currentPage() - 1) * 10 ) }}</td>
+                        <td>{{ $state->country->name }}</td>
                         <td>{{ $state->name }}</td>
-                        <td>{{ $state->country_id }}</td>
                         <td>
                             @can('state-edit')
                                 <a class="btn btn-primary" href="javascript:void(0)" wire:click="edit({{ $state->id }})">Edit</a>

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\State;
-use Excel;
-use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Imports\StateImport;
 use App\Exports\StateExport;
@@ -119,53 +119,49 @@ class StateController extends Controller
         return redirect()->route('state.index')
                         ->with('success','State deleted successfully');
     }
+    
     function import(Request $request)
-    //var_dump($request);die();
     {
-     $this->validate($request, [
-      'select_file'  => 'required|mimes:xls,xlsx'
-     ]);
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
 
-     $path = $request->file('select_file')->getRealPath();
+        $path = $request->file('select_file')->getRealPath();
 
-     $data = Excel::load($path)->get();
+        $data = Excel::load($path)->get();
 
-     if($data->count() > 0)
-     {
-      foreach($data->toArray() as $key => $value)
-      {
-       foreach($value as $row)
-       {
-        $insert_data[] = array(
-         'Name'  => $row['name'],
-        'Country-id' =>$row['country_id'],   
-        );
-       }
-      }
-
-      if(!empty($insert_data))
-      {
-       DB::table('states')->insert($insert_data);
-      }
-     }
-     return back()->with('success', 'Excel Data Imported successfully.');
-    }
-
-     public function exportIntoExcel()
+        if($data->count() > 0)
         {
-        return Excel::download(new StateExport,'statlist.xlsx');
-     }
-        public function exportIntoCSV(){
-        return Excel::download(new StateExport,'statlist.csv');
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'Name'  => $row['name'],
+                    'Country-id' =>$row['country_id'],   
+                    );
+                }
+            }
 
+            if(!empty($insert_data)){
+                DB::table('states')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
     }
 
-     public function imports(Request $request)
+    public function exportIntoExcel()
     {
+        return Excel::download(new StateExport,'statlist.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new StateExport,'statlist.csv');
+    }
+
+    public function imports(Request $request){
         $request->validate([
             'import_file' => 'required'
         ]);
-        Excel::import(new StateImport($country_id), request()->file('import_file'));
+        Excel::import(new StateImport, request()->file('import_file'));
         return back()->with('success', 'States imported successfully.');
     }
  
