@@ -431,8 +431,11 @@ class Edit extends Component
         $divyang->i_agree_share_aadhar = 1;
         $divyang->i_agree = 1;
         if($divyang->save()){
+            
             $divyang->disabilityTypes()->syncWithoutDetaching($this->disability_type);
+
             $divyang->disabilityAreas()->syncWithoutDetaching($this->disability_area);
+
         }
 
         return redirect()->route('divyang.index');

@@ -341,9 +341,13 @@ class Create extends Component
         }else{
             $divyang->created_id = $user->id;
         }
+
         if($divyang->save()){
+            
             $divyang->disabilityTypes()->attach($this->disability_type);
+
             $divyang->disabilityAreas()->attach($this->disability_area);
+            
         }
 
         return redirect()->route('divyang.index');

@@ -67,7 +67,12 @@ class Admin extends Component
         $users = [];
         
         if($model == 'Country'){
-            
+            $states = State::where('country_id', $model)->pluck('id');
+            $users = User::whereIn('areable_id', $states)->where('areable_type', 'App\Models\State')->get();
+            $districtUsers = User::whereIn('areable_id', $states)->where('areable_type', 'App\Models\District')->get();
+            /**
+             * Get all the users and concatenate them
+             */
         }elseif($model == 'State'){
 
         }elseif($model == 'District'){
