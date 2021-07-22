@@ -12,6 +12,7 @@ class Country extends Model
     /**
      * The roles that belong to the user.
      */
+    protected $table="countries";
     protected $fillable = [
         'name',
     ];

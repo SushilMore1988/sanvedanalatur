@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -148,12 +147,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/country/edit/{id}', [App\Http\Controllers\CountryController::class, 'edit'])->name('country.edit');
     Route::patch('/country/update/{id}', [App\Http\Controllers\CountryController::class, 'update'])->name('country.update');
     Route::delete('/country/destroy/{id}', [App\Http\Controllers\CountryController::class, 'destroy'])->name('country.destroy');
+     Route::post('/import_excel/import',[App\Http\Controllers\CountryController::class, 'imports']);
+     Route::get('export-excel', [App\Http\Controllers\CountryController::class, 'export']);
+
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     /*--------------------------------------------------States------------------------------------------------------------------------------------*/    
     Route::get('/states', function(){
         return view('state.index');
     })->name('states.index');
+    Route::post('/import_excel/import',[App\Http\Controllers\StateController::class, 'imports']);
+     Route::get('export-excel', [App\Http\Controllers\Controller::class, 'export']);
+
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     /*--------------------------------------------------Districts------------------------------------------------------------------------------------*/

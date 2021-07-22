@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Country;
+use Excel;
+use DB;
+use App\Http\Controllers\Controller;
+use App\Imports\CountryImport;
+use App\Exports\CountryExport;
 
 class CountryController extends Controller
 {
@@ -111,4 +116,56 @@ class CountryController extends Controller
         return redirect()->route('country.index')
                         ->with('success','Country deleted successfully');
     }
+    
+    function import(Request $request)
+    {
+     $this->validate($request, [
+      'select_file'  => 'required|mimes:xls,xlsx'
+     ]);
+
+     $path = $request->file('select_file')->getRealPath();
+
+     $data = Excel::load($path)->get();
+
+     if($data->count() > 0)
+     {
+      foreach($data->toArray() as $key => $value)
+      {
+       foreach($value as $row)
+       {
+        $insert_data[] = array(
+         'Name'  => $row['name']
+        );
+       }
+      }
+
+      if(!empty($insert_data))
+      {
+       DB::table('countries')->insert($insert_data);
+      }
+     }
+     return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+    return Excel::download(new CountryExport,'countrieslist.xlsx');
+ }
+    public function exportIntoCSV(){
+    return Excel::download(new CountryExport,'countrieslist.csv');
+
+}
+public function imports(Request $request)
+{
+    $request->validate([
+        'import_file' => 'required'
+    ]);
+    Excel::import(new Countryimport, request()->file('import_file'));
+    return back()->with('success', 'Country imported successfully.');
+}
+
+public function export() 
+{
+    return Excel::download(new CountryExport, 'country.xlsx');
+}
 }
