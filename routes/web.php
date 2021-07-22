@@ -215,6 +215,6 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/admin/index', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 
-    Route::get('/admin/create', [App\Http\Controllers\AdminController::class, 'create'])->name('admin.create');
+    // Route::get('/admin/create', [App\Http\Controllers\AdminController::class, 'create'])->name('admin.create');
     
 });

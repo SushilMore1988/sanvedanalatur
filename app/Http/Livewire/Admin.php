@@ -6,7 +6,6 @@ use App\Models\City;
 use App\Models\Country;
 use App\Models\District;
 use App\Models\Mahanagarpalika;
-use App\Models\Nagarparishad;
 use App\Models\Role;
 use App\Models\State;
 use App\Models\Taluka;
@@ -15,7 +14,6 @@ use App\Models\Zone;
 use App\Models\Village;
 use App\Models\MahanagarpalikaWardNumber;
 use App\Models\NagarparishadWardNumber;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -48,9 +46,15 @@ class Admin extends Component
 
     public function render()
     {
-        $roleArray = RoleCanViewData::where('role_id', Auth::user()->roles()->first()->id)->pluck('view_role_id');
-        $roles = Role::whereIn('id', $roleArray)->pluck('name');
-        $users = $this->getBelongingUsers(str_replace('App\Models\\', '', Auth::user()->areable_type), Auth::user()->areable_id, Auth::id());
+        if(Auth::user()->hasRole('Admin')){
+            $roleArray = RoleCanViewData::where('role_id', Auth::user()->roles()->first()->id)->pluck('view_role_id');
+            $roles = Role::whereIn('id', $roleArray)->pluck('name', 'id');
+            $users = User::all();
+        }else{
+            $roleArray = RoleCanViewData::where('role_id', Auth::user()->roles()->first()->id)->pluck('view_role_id');
+            $roles = Role::whereIn('id', $roleArray)->pluck('name', 'id');
+            $users = $this->getBelongingUsers(str_replace('App\Models\\', '', Auth::user()->areable_type), Auth::user()->areable_id, Auth::id());
+        }
         return view('livewire.admin', [
             'users' => $users,
             'roles' => $roles,
@@ -112,6 +116,18 @@ class Admin extends Component
 
     public function roleChanged()
     {
+        $this->showCountry = false;
+        $this->showState = false;
+        $this->showDistrict = false;
+        $this->showTaluka = false;
+        $this->showVillage = false;
+        $this->showNagarparishad = false;
+        $this->showNagarparishadWardNumber = false;
+        $this->showMahanagarpalika = false;
+        $this->showZone = false;
+        $this->showMahanagarpalikaWardNumber = false;
+        $this->showCity = false;
+        
         $this->area = Role::findOrFail($this->role)->area->name;
 
         if($this->area == 'Country'){
@@ -139,13 +155,13 @@ class Admin extends Component
             $this->showTaluka = true;
             $this->showVillage = true;
         }
-        if($this->area == 'City'){
-            $this->showCountry = true;
-            $this->showState = true;
-            $this->showDistrict = true;
-            $this->showTaluka = true;
-            $this->showCity = true;
-        }
+        // if($this->area == 'City'){
+        //     $this->showCountry = true;
+        //     $this->showState = true;
+        //     $this->showDistrict = true;
+        //     $this->showTaluka = true;
+        //     $this->showCity = true;
+        // }
         if($this->area == 'Mahanagarpalika'){
             $this->showCountry = true;
             $this->showState = true;

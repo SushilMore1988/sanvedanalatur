@@ -20,26 +20,51 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $totalArray[0] = 0;
+                        $totalArray[1] = 0;
+                    @endphp
                     @foreach($disabilityTypes as $disabilityType)
                     <tr>
                         <td>{{ $disabilityType->type }}</td>
                         @php
                             $total = 0;
-                        @endphp
-                        @php
                             $count = $disabilityType->divyangs->where('st_pass', 1)->count();
                             $total += $count;
+                            $totalArray[0] += $count;
                         @endphp
+                        @if($count <= 0)
                         <td>{{ $count }}</td>
+                        @else
+                        <td><a href="{{ url("divyang?disability_type=$disabilityType->type&parameter=st_pass&st_pass=1")}}">{{ $count }}</a></td>
+                        @endif
                         @php
                             $count = $disabilityType->divyangs->where('st_pass', 0)->count();
                             $total += $count;
+                            $totalArray[1] += $count;
                         @endphp
+                        @if($count <= 0)
                         <td>{{ $count }}</td>
-                        <td>{{ $total }}</td>
+                        @else
+                        <td><a href="{{ url("divyang?disability_type=$disabilityType->type&parameter=st_pass&st_pass=0")}}">{{ $count }}</a></td>
+                        @endif
+                        @if($total <= 0)
+                            <td>{{ $total }}</td>
+                        @else
+                            <td><a href="{{ url("divyang?disability_type=$disabilityType->type")}}">{{ $total }}</a></td>
+                        @endif
                     </tr>
                     @endforeach
-                
+                    <tr>
+                        <td>Total</td>
+                        <td><a href="{{ url("divyang?parameter=st_pass&st_pass=1")}}">{{ $totalArray[0] }}</a></td>
+                        <td><a href="{{ url("divyang?parameter=st_pass&st_pass=0")}}">{{ $totalArray[1] }}</a></td>
+                        @if(($totalArray[0] + $totalArray[1]) <= 0)
+                            <td>{{ $totalArray[0] + $totalArray[1] }}</td>
+                        @else
+                            <td><a href="{{ url("divyang")}}">{{ $totalArray[0] + $totalArray[1] }}</a></td>
+                        @endif
+                    </tr>
             </table>
         </div>
     </div>

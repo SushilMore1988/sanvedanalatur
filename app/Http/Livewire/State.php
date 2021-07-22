@@ -32,9 +32,19 @@ class State extends Component
     public function store()
     {
         $this->validate([
-            'name' => 'required|regex:/^[\pL\s\-]+$/u|unique:states,name',
+            'name' => 'required|regex:/^[\pL\s\-]+$/u',
             'country' => 'required|exists:countries,id'
         ]);
+
+        if(empty($this->state_id)){
+            $this->validate([
+                'name' => 'unique:states,name'
+            ]);
+        }else{
+            $this->validate([
+                'name' => 'unique:states,name,'.$this->state_id
+            ]);
+        }
 
         StateModel::updateOrCreate(['id' => $this->state_id],['country_id' => $this->country, 'name' => $this->name]);
 

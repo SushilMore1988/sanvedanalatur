@@ -21,23 +21,68 @@
                     </tr>
                 </thead>
                 <tbody>
+                    @php
+                        $totalArray = [];
+                    @endphp
                     @foreach($disabilityTypes as $disabilityType)
+                        <tr>
+                            <td>{{ $disabilityType->type }}</td>
+                            @php
+                                $total = 0;
+                                $i = 0;
+                            @endphp
+                            @foreach($castes as $caste)
+                                @php
+                                    $count = $disabilityType->divyangs->where('caste_id', $caste->id)->count();
+                                    $total += $count;
+                                    if(isset($totalArray[$i])){
+                                        $totalArray[$i] += $count;
+                                    }else{
+                                        $totalArray[$i] = $count;
+                                    }
+                                    $i++;
+                                @endphp
+                                @if($count <= 0)
+                                    <td>{{ $count }}</td>
+                                @else
+                                    <td><a href="{{ url("divyang?disability_type=$disabilityType->type&parameter=caste_id&caste_id=$caste->id")}}">{{ $count }}</a></td>
+                                @endif
+                            @endforeach
+                            {{-- <td>{{ $total }}</td> --}}
+                            @if($total <= 0)
+                                <td>{{ $total }}</td>
+                            @else
+                                <td><a href="{{ url("divyang?disability_type=$disabilityType->type")}}">{{ $total }}</a></td>
+                            @endif
+                        </tr>
+                    @endforeach
+
+
                     <tr>
-                        <td>{{ $disabilityType->type }}</td>
+                        <td>Total</td>
                         @php
-                            $total = 0;
+                            $i = 0;
+                            $grandTotal = 0;
                         @endphp
                         @foreach($castes as $caste)
-                        @php
-                            $count = $disabilityType->divyangs->where('caste_id', $caste->id)->count();
-                            $total += $count;
-                        @endphp
-                        <td>{{ $count }}</td>
+                            {{-- <td>{{ $totalArray[$i] }}</td> --}}
+                            @if($totalArray[$i] <= 0)
+                                <td>{{ $totalArray[$i] }}</td>
+                            @else
+                                <td><a href="{{ url("divyang?parameter=caste_id&caste_id=$caste->id")}}">{{ $totalArray[$i] }}</a></td>
+                            @endif
+                            @php
+                                $grandTotal += $totalArray[$i];
+                                $i++;
+                            @endphp
                         @endforeach
-                        <td>{{ $total }}</td>
+                        {{-- <td>{{ $grandTotal }}</td> --}}
+                        @if($grandTotal <= 0)
+                            <td>{{ $grandTotal }}</td>
+                        @else
+                            <td><a href="{{ url("divyang")}}">{{ $grandTotal }}</a></td>
+                        @endif
                     </tr>
-                    @endforeach
-                
             </table>
         </div>
     </div>
