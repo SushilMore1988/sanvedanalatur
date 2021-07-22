@@ -45,19 +45,21 @@
             @endcan
         </div>
         <div class="row">
-            <div class="col-lg-12 text-right">
-                <input class="" placeholder="search..." name="search" wire:model="search">
-            </div>
-            <div class="col-lg-12">
+            <div class="col-lg-8">
                 <form method="post" enctype="multipart/form-data" action="{{ url('/import_excel/import') }}">
                     {{ csrf_field() }}
-                    <label>Select File for Upload</label>
-               
+                    {{-- <label>Select File for Upload</label> --}}
+            
                     <input type="file" name="import_file" />
-               
+            
                     <button class="btn btn-success">Import File</button>
                     <a class="btn btn-info" href="{{ url('export-excel') }}">Export File</a>
                 </form>
+            </div>
+            <div class="col-lg-4 text-right">
+                <input class="" placeholder="search..." name="search" wire:model="search">
+            </div>
+            <div class="col-lg-12">
                 <table id="datatable" class="table table-bordered table-hover" style="width:100%">
                     <tr>
                         <th>No</th>
