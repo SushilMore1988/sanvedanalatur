@@ -7,6 +7,7 @@ use App\Models\Divyang;
 use Illuminate\Http\Request;
 
 class DivyangController extends Controller
+
 {
     public function index(Request $request)
     {
