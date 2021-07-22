@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,6 +21,7 @@ Auth::routes();
 
 Route::get('/divyang/create', [App\Http\Controllers\DivyangController::class, 'create'])->name('divyang.create');
 Route::post('/divyang/store', [App\Http\Controllers\DivyangController::class, 'store'])->name('divyang.store');
+Route::get('/divyang/singleuser/{id}', [App\Http\Controllers\DivyangController::class, 'singleuser'])->name('divyang.singleuser');
 
 Route::middleware('auth')->group(function () {
 
@@ -147,12 +147,18 @@ Route::middleware('auth')->group(function () {
     Route::get('/country/edit/{id}', [App\Http\Controllers\CountryController::class, 'edit'])->name('country.edit');
     Route::patch('/country/update/{id}', [App\Http\Controllers\CountryController::class, 'update'])->name('country.update');
     Route::delete('/country/destroy/{id}', [App\Http\Controllers\CountryController::class, 'destroy'])->name('country.destroy');
+     Route::post('/import_excel/import',[App\Http\Controllers\CountryController::class, 'imports']);
+     Route::get('export-excel', [App\Http\Controllers\CountryController::class, 'export']);
+
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     /*--------------------------------------------------States------------------------------------------------------------------------------------*/    
     Route::get('/states', function(){
         return view('state.index');
     })->name('states.index');
+    Route::post('/import_excel/import',[App\Http\Controllers\StateController::class, 'imports']);
+     Route::get('export-excel', [App\Http\Controllers\Controller::class, 'export']);
+
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     /*--------------------------------------------------Districts------------------------------------------------------------------------------------*/

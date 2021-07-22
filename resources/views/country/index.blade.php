@@ -21,6 +21,23 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+        <form method="post" enctype="multipart/form-data" action="{{ url('/import_excel/import') }}">
+        {{ csrf_field() }}
+         <tr>
+       <td width="40%" align="right"><label>Select File for Upload</label></td>
+       <td width="30">
+        <input type="file" name="import_file" />
+       </td>
+       <button class="btn btn-success">Import File</button>
+                <a class="btn btn-info" href="{{ url('export-excel') }}"> 
+                 Export File</a>
+      </tr>
+      <tr>
+       <td width="40%" align="right"></td>
+       <td width="30"><span class="text-muted">.xls, .xslx</span></td>
+       <td width="30%" align="left"></td>
+      </tr>
+</form>
             <table id="datatable" class="table table-bordered table-hover" style="width:100%">
                 <tr>
                     <th>No</th>
