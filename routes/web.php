@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -147,8 +148,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/country/edit/{id}', [App\Http\Controllers\CountryController::class, 'edit'])->name('country.edit');
     Route::patch('/country/update/{id}', [App\Http\Controllers\CountryController::class, 'update'])->name('country.update');
     Route::delete('/country/destroy/{id}', [App\Http\Controllers\CountryController::class, 'destroy'])->name('country.destroy');
-     Route::post('/import_excel/import',[App\Http\Controllers\CountryController::class, 'imports']);
-     Route::get('export-excel', [App\Http\Controllers\CountryController::class, 'export']);
+     Route::get('/import_excel/import',[App\Http\Controllers\CountryController::class, 'imports']);
+     Route::post('export-excel', [App\Http\Controllers\CountryController::class, 'export']);
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
@@ -157,7 +158,7 @@ Route::middleware('auth')->group(function () {
         return view('state.index');
     })->name('states.index');
     Route::post('/import_excel/import',[App\Http\Controllers\StateController::class, 'imports']);
-     Route::get('export-excel', [App\Http\Controllers\Controller::class, 'export']);
+    Route::get('export-excel', [App\Http\Controllers\StateController::class, 'export']);
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
@@ -169,6 +170,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/districts/edit/{id}', [App\Http\Controllers\DistrictController::class, 'edit'])->name('districts.edit');
     Route::patch('/districts/update/{id}', [App\Http\Controllers\DistrictController::class, 'update'])->name('districts.update');
     Route::delete('/districts/destroy/{id}', [App\Http\Controllers\DistrictController::class, 'destroy'])->name('districts.destroy');
+    Route::post('/import_excel/import',[App\Http\Controllers\DistrictController::class, 'imports']);
+     Route::get('export-excel', [App\Http\Controllers\DistrictController::class, 'export']);
+
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
 
     Route::get('/cities', [App\Http\Controllers\DivyangController::class, 'index'])->name('cities.index');
@@ -181,6 +185,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/talukas/edit/{id}', [App\Http\Controllers\TalukaController::class, 'edit'])->name('talukas.edit');
     Route::patch('/talukas/update/{id}', [App\Http\Controllers\TalukaController::class, 'update'])->name('talukas.update');
     Route::delete('/talukas/destroy/{id}', [App\Http\Controllers\TalukaController::class, 'destroy'])->name('talukas.destroy');
+    Route::post('/import_excel/import',[App\Http\Controllers\TalukaController::class, 'imports']);
+    Route::get('export-excel', [App\Http\Controllers\TalukaController::class, 'export']);
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
 
     /*--------------------------------------------------Villages------------------------------------------------------------------------------------*/
@@ -196,6 +202,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/mahangarpalikas', function () {
         return view('mahanagarpalika.index');
     })->name('mahangarpalikas.index');
+
+    Route::post('/import_excel/import',[App\Http\Controllers\MahanagarpalikaController::class, 'imports']);
+    Route::get('export-excel', [App\Http\Controllers\MahanagarpalikaController::class, 'export']);
 
     Route::get('/mahangarpalika-zones', function () {
         return view('zone.index');

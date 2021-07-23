@@ -6,7 +6,11 @@ use Illuminate\Http\Request;
 use App\Models\State;
 use App\Models\District;
 use App\Models\Taluka;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportTaluka;
+use App\Exports\ExportTaluka;
 
 
 class TalukaController extends Controller
@@ -76,6 +80,56 @@ class TalukaController extends Controller
         Taluka::find($id)->delete();
         return redirect()->route('taluka.index')
                         ->with('success','Taluka deleted successfully');
+    }
+
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'Name'  => $row['name'],
+                    'District-id' =>$row['district_id'],   
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('talukas')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportTaluka,'Taluka.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportTaluka,'Talukalist.csv');
+    }
+
+    public function imports(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportTaluka, request()->file('import_file'));
+        return back()->with('success', 'Taluka imported successfully.');
+    }
+ 
+    public function export() 
+    {
+        return Excel::download(new ExportTaluka, 'states.xlsx');
     }
 
 }

@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\State;
 use App\Models\District;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportDistrict;
+use App\Exports\ExportDistrict;
 
 class DistrictController extends Controller
 {
@@ -70,6 +75,55 @@ class DistrictController extends Controller
         District::find($id)->delete();
         return redirect()->route('district.index')
                         ->with('success','District deleted successfully');
+    }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'Name'  => $row['name'],
+                    'State-id' =>$row['state_id'],   
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('districts')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportDistrict,'district.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportDistrict,'districtlist.csv');
+    }
+
+    public function imports(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportDistrict, request()->file('import_file'));
+        return back()->with('success', 'District imported successfully.');
+    }
+ 
+    public function export() 
+    {
+        return Excel::download(new ExportDistrict, 'District.xlsx');
     }
 
 }
