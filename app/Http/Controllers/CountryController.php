@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Country;
-use Excel;
-use DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Imports\CountryImport;
 use App\Exports\CountryExport;
