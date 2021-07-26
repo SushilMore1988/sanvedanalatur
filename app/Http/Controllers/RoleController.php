@@ -127,13 +127,14 @@ class RoleController extends Controller
 
         
         $role->syncPermissions($request->input('permission'));
-        
-        foreach($request->roles as $role)
-        {
-            $roleCanViewData = new RoleCanViewData;
-            $roleCanViewData->role_id = $id;
-            $roleCanViewData->view_role_id = $role;
-            $roleCanViewData->save();
+        if(!empty($request->roles)){
+            foreach($request->roles as $role)
+            {
+                $roleCanViewData = new RoleCanViewData;
+                $roleCanViewData->role_id = $id;
+                $roleCanViewData->view_role_id = $role;
+                $roleCanViewData->save();
+            }
         }
     
         return redirect()->route('roles.index')

@@ -53,3 +53,10 @@ Mahanagarpalikas
 Mahanagarpalikas_ward_number
 zones
 
+Ahwal lists
+
+1. District Medical Board Certificate Availability Report
+2.  Railway Travel Concession Certificate Availability wise report
+3. Job wise report
+4. Disability report as require
+5. Age wise report
