@@ -21,7 +21,7 @@
                     <tr>
                        <td>{{ $divyangs->id }}</td>
                        <td>{{ $divyangs->first_name }}</td>
-                       
+                       <td></td>
                     </tr>
                     {{--@endif--}}
             </table>

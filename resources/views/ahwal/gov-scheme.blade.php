@@ -29,7 +29,7 @@
                         <td>{{ $disabilityType->type }}</td>
                         @php
                             $total = 0;
-                            $count = $disabilityType->divyangs->where('government_scheme', 1)->count();
+                            $count = $disabilityType->divyangs()->where('government_scheme', 1)->withArea()->count();
                             $total += $count;
                         @endphp
                         @if($count <= 0)
@@ -41,7 +41,7 @@
                             @endphp
                         @endif
                         @php
-                            $count = $disabilityType->divyangs->where('government_scheme', 0)->count();
+                            $count = $disabilityType->divyangs()->where('government_scheme', 0)->withArea()->count();
                             $total += $count;
                         @endphp
                         @if($count <= 0)

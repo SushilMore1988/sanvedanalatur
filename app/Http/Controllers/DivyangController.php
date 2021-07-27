@@ -28,8 +28,13 @@ class DivyangController extends Controller
         return view('divyang.create');
     }
 
-    public function edit($id)
+    public function edit(Divyang $divyang)
     {
-        return view('divyang.edit', compact('id'));
+        return view('divyang.edit', compact('divyang'));
+    }
+
+    public function show(Divyang $divyang)
+    {
+        return view('divyang.show', compact('divyang'));
     }
 }

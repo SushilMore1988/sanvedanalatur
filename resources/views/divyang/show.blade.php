@@ -7,5 +7,5 @@
         
     </x-slot>
 
-    @livewire('divyang.create.edit', ['id' => $divyang->id])
+    @livewire('divyang.create.show', ['id' => $divyang->id])
 </x-auth-layout>

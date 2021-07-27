@@ -87,7 +87,7 @@
                             </div>
                         </li>
                         @endcan
-                        @can('permission-list')
+                        @can('permissions-list')
                         <li>
                             <div class="media">
                                 <i class="fas fa-user mr-3"></i> 

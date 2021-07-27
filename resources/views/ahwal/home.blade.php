@@ -31,7 +31,7 @@
                             $total = 0;
                         @endphp
                         @php
-                            $count = $disabilityType->divyangs->where('home', 1)->count();
+                            $count = $disabilityType->divyangs()->where('home', 1)->withArea()->count();
                             $total += $count;
                             $totalArray[0] += $count;
                         @endphp
@@ -41,7 +41,7 @@
                         <td><a href="{{ url("divyang?disability_type=$disabilityType->type&parameter=home&home=1")}}">{{ $count }}</a></td>
                         @endif
                         @php
-                            $count = $disabilityType->divyangs->where('home', 0)->count();
+                            $count = $disabilityType->divyangs()->where('home', 0)->withArea()->count();
                             $total += $count;
                             $totalArray[1] += $count;
                         @endphp

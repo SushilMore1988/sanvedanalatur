@@ -33,7 +33,7 @@
                         @endphp
                         @foreach($educations as $education)
                         @php
-                            $count = $disabilityType->divyangs->where('education', $education)->count();
+                            $count = $disabilityType->divyangs()->where('education', $education)->withArea()->count();
                             $total += $count;
                             if(isset($totalArray[$i])){
                                 $totalArray[$i] += $count;

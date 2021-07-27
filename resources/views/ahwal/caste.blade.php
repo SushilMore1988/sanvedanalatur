@@ -33,7 +33,7 @@
                             @endphp
                             @foreach($castes as $caste)
                                 @php
-                                    $count = $disabilityType->divyangs->where('caste_id', $caste->id)->count();
+                                    $count = $disabilityType->divyangs()->where('caste_id', $caste->id)->withArea()->count();
                                     $total += $count;
                                     if(isset($totalArray[$i])){
                                         $totalArray[$i] += $count;
