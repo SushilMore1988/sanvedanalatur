@@ -33,9 +33,12 @@
                        <td>{{ $divyang->first_name }}</td>
                        <td>
                            @can('divyang-edit')
-                               <a class="btn btn-primary" href="{{ route('divyang.edit',$divyang->id) }}">Edit</a>
-                           @endcan
-                           @can('divyang-delete')
+                               <a class="btn btn-primary text-white" href="{{ route('divyang.edit',$divyang->id) }}">Edit</a>
+                            @endcan
+                            @can('divyang-list')
+                               <a class="btn btn-success text-white" target="_blank" href="{{ route('divyang.show',$divyang->id) }}">Show</a>
+                            @endcan
+                           @can('divyangs-delete')
                                {!! Form::open(['method' => 'DELETE','route' => ['divyang.destroy', $divyang->id],'style'=>'display:inline']) !!}
                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                {!! Form::close() !!}

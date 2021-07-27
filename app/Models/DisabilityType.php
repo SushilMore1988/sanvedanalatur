@@ -15,7 +15,8 @@ class DisabilityType extends Model
     protected $fillable = [
         'type',
     ];
-     public function divyangs()
+    
+    public function divyangs()
     {
         return $this->belongsToMany(Divyang::class);
     }

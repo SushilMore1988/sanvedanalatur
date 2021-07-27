@@ -173,7 +173,7 @@
                             <td>{!! $user->hasRole('Admin') ? 'All' : (empty($user->areable_id) ? 'Not Assigned' : $user->areable->name) !!}</td>
                             <td>{!! $user->name !!}</td>
                             <td>{!! $user->phone !!}</td>
-                            <td>{!! $user->roles->pluck('name') !!}</td>
+                            <td>{!! $user->roles->pluck('name')->implode(', ') !!}</td>
                             <td>
                                 @if($user->active == 1)
                                 <span class="badge badge-pill badge-primary">Active</span>

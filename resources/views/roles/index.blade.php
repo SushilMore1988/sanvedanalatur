@@ -13,9 +13,11 @@
         <div class="col-lg-6">
             <h4 class="text-dark p-semibold f-20 d-inline-block">Roles List</h4>
         </div>
-        <div class="col-lg-6 text-right">
-            <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
-        </div>
+        @can('roles-create')
+            <div class="col-lg-6 text-right">
+                <a class="btn btn-success" href="{{ route('roles.create') }}"> Create New Role</a>
+            </div>
+        @endcan
     </div>
     <div class="row">
         <div class="col-lg-12">
@@ -34,10 +36,10 @@
                        <td>{{ empty($role->area) ? '' : $role->area->name }}</td>
                        <td>
                            <a class="btn btn-info" href="{{ route('roles.show',$role->id) }}">Show</a>
-                           @can('role-edit')
+                           @can('roles-edit')
                                <a class="btn btn-primary" href="{{ route('roles.edit',$role->id) }}">Edit</a>
                            @endcan
-                           @can('role-delete')
+                           @can('roles-delete')
                                {!! Form::open(['method' => 'DELETE','route' => ['roles.destroy', $role->id],'style'=>'display:inline']) !!}
                                    {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
                                {!! Form::close() !!}

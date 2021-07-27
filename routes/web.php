@@ -46,9 +46,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     
     Route::get('/divyang', [App\Http\Controllers\DivyangController::class, 'index'])->name('divyang.index');
-    Route::get('/divyang/show/{id}', [App\Http\Controllers\DivyangController::class, 'show'])->name('divyang.show');
+    Route::get('/divyang/show/{divyang}', [App\Http\Controllers\DivyangController::class, 'show'])->name('divyang.show');
     
-    Route::get('/divyang/edit/{id}', [App\Http\Controllers\DivyangController::class, 'edit'])->name('divyang.edit');
+    Route::get('/divyang/edit/{divyang}', [App\Http\Controllers\DivyangController::class, 'edit'])->name('divyang.edit');
     Route::patch('/divyang/update/{id}', [App\Http\Controllers\DivyangController::class, 'update'])->name('divyang.update');
     Route::delete('/divyang/destroy/{id}', [App\Http\Controllers\DivyangController::class, 'destroy'])->name('divyang.destroy');
 

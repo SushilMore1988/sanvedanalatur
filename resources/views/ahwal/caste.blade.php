@@ -33,18 +33,7 @@
                             @endphp
                             @foreach($castes as $caste)
                                 @php
-                                @if(Auth::user()->hasRole(['Admin']))
-                                    $count = $disabilityType->divyangs->where('caste_id', $caste->id)->count();
-                                @elseif(Auth::user()->hasRole(['CEO']))
-                                    $count = $disabilityType->divyangs->where('district_id', Auth::user()->areable_id)where('caste_id', $caste->id)->count();
-                                @elseif(Auth::user()->hasRole(['Gramsevak', 'BDO']))
-                                    $count = $disabilityType->divyangs->where('district_id', Auth::user()->areable_id)where('caste_id', $caste->id)->count();
-                                @elseif(Auth::user()->hasRole(['Commisioner', 'Mahanagarpalika Ward Officer']))
-
-                                @elseif(Auth::user()->hasRole(['City Concile', 'Nagarparishad Ward Officer']))
-
-                                @endif
-
+                                    $count = $disabilityType->divyangs()->where('caste_id', $caste->id)->withArea()->count();
                                     $total += $count;
                                     if(isset($totalArray[$i])){
                                         $totalArray[$i] += $count;
