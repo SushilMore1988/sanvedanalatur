@@ -7,7 +7,11 @@ use App\Models\State;
 use App\Models\District;
 use App\Models\Taluka;
 use App\Models\Village;
-
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportVillage;
+use App\Exports\ExportVillage;
 
 class VillageController extends Controller
 {
@@ -80,7 +84,55 @@ class VillageController extends Controller
         return redirect()->route('village.index')
                         ->with('success','Village deleted successfully');
     }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
 
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'Name'  => $row['name'],
+                    'taluka-id' =>$row['taluka_id'],   
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('villages')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+            public function exportIntoExcel()
+            {
+                return Excel::download(new ExportViilage,'village.xlsx');
+            }
+            
+            public function exportIntoCSV(){
+                return Excel::download(new ExportViilage,'villagelist.csv');
+            }
+
+            public function imports(Request $request){
+                $request->validate([
+                    'import_file' => 'required'
+                ]);
+                Excel::import(new ImportVillage, request()->file('import_file'));
+                return back()->with('success', 'Village imported successfully.');
+            }
+        
+            public function export() 
+            {
+                return Excel::download(new ExportVillage, 'village.xlsx');
+            }
 }
 
 

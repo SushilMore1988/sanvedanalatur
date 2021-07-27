@@ -77,6 +77,15 @@
             <input class="" placeholder="search..." name="search" wire:model="search">
         </div>
         <div class="col-lg-12">
+        <form method="post" enctype="multipart/form-data" action="{{ url('/import_excel/import') }}">
+                    {{ csrf_field() }}
+                    {{-- <label>Select File for Upload</label> --}}
+            
+                    <input type="file" name="import_file" />
+            
+                    <button class="btn btn-success">Import File</button>
+                    <a class="btn btn-info" href="{{ url('export-excel') }}">Export File</a>
+                </form> 
             <table id="datatable" class="table table-bordered table-hover" style="width:100%">
                 <tr>
                     <th>No</th>
@@ -87,6 +96,8 @@
                     <tr>
                        <td>{{ $loop->index+1 + ( ($wards->links()->paginator->currentPage() - 1) * 10 ) }}</td>
                        <td>{{ $ward->name }}</td>
+                       <td>{{ $ward->mahanagarpalika_id }}</td>
+                       <td>{{ $ward->zone_id }}</td>
                        <td>
                            @can('mahanagarpalika-ward-edit')
                                <a class="btn btn-primary" href="javascript:void(0)" wire:click="edit({{ $ward->id }})">Edit</a>

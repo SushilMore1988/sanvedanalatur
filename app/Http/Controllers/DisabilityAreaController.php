@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DisabilityArea;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportDisabilityArea;
+use App\Exports\ExportDisabilityArea;
 
 class DisabilityAreaController extends Controller
 {
@@ -111,4 +116,54 @@ class DisabilityAreaController extends Controller
         return redirect()->route('disability-areas.index')
                         ->with('success','Disability area deleted successfully');
     }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'type'  => $row['type'],
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('disability_areas')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportDisabilityArea,'Disability.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportDisabilityArea,'Disabilitylist.csv');
+    }
+
+    public function importe(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportDisabilityArea, request()->file('import_file'));
+        return back()->with('success', 'Disability imported successfully.');
+    }
+ 
+    public function exports() 
+    {
+        return Excel::download(new ExportDisabilityArea, 'Disability.xlsx');
+    }
+
+
 }

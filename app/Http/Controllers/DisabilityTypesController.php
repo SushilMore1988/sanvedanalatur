@@ -5,6 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DisabilityType;
 use App\Models\Role;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportDisability;
+use App\Exports\ExportDisability;
+
 use Spatie\Permission\Models\Permission;
 
 class DisabilityTypesController extends Controller
@@ -113,4 +119,54 @@ class DisabilityTypesController extends Controller
         return redirect()->route('disability-types.index')
                         ->with('success','Disability type deleted successfully');
     }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'type'  => $row['type'],
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('disability_types')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportDisability,'Disability.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportDisability,'Disabilitylist.csv');
+    }
+
+    public function importe(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportDisability, request()->file('import_file'));
+        return back()->with('success', 'Disability imported successfully.');
+    }
+ 
+    public function exports() 
+    {
+        return Excel::download(new ExportDisability, 'Disability.xlsx');
+    }
+
+
 }

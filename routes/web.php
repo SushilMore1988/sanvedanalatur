@@ -71,6 +71,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/disability-types/edit/{id}', [App\Http\Controllers\DisabilityTypesController::class, 'edit'])->name('disability-types.edit');
     Route::patch('/disability-types/update/{id}', [App\Http\Controllers\DisabilityTypesController::class, 'update'])->name('disability-types.update');
     Route::delete('/disability-types/destroy/{id}', [App\Http\Controllers\DisabilityTypesController::class, 'destroy'])->name('disability-types.destroy');
+    Route::post('/import_excel/imported',[App\Http\Controllers\DisabilityTypesController::class, 'importe']);
+    Route::get('export-excelse', [App\Http\Controllers\DisabilityTypesController::class, 'exports']);
 
     /*---------------------------------------------------------Disability Areas---------------------------------------------------------------------*/
 
@@ -81,7 +83,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/disability-areas/edit/{id}', [App\Http\Controllers\DisabilityAreaController::class, 'edit'])->name('disability-areas.edit');
     Route::patch('/disability-areas/update/{id}', [App\Http\Controllers\DisabilityAreaController::class, 'update'])->name('disability-areas.update');
     Route::delete('/disability-areas/destroy/{id}', [App\Http\Controllers\DisabilityAreaController::class, 'destroy'])->name('disability-areas.destroy');
-
+    Route::post('/import_excel/importt',[App\Http\Controllers\DisabilityAreaController::class, 'importe']);
+    Route::get('export-excele', [App\Http\Controllers\DisabilityAreaController::class, 'exports']);
     /*----------------------------------------------------------Disability Reason-------------------------------------------------------------------*/
 
     Route::get('/disability-reasons', [App\Http\Controllers\ReasonController::class, 'index'])->name('disability-reasons.index');
@@ -197,6 +200,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/villages/edit/{id}', [App\Http\Controllers\VillageController::class, 'edit'])->name('villages.edit');
     Route::patch('/villages/update/{id}', [App\Http\Controllers\VillageController::class, 'update'])->name('villages.update');
     Route::delete('/villages/destroy/{id}', [App\Http\Controllers\VillageController::class, 'destroy'])->name('villages.destroy');
+    Route::post('/import_excel/import',[App\Http\Controllers\VillageController::class, 'imports']);
+    Route::get('export-excel', [App\Http\Controllers\VillageController::class, 'export']);
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
     
     Route::get('/mahangarpalikas', function () {
@@ -209,18 +214,28 @@ Route::middleware('auth')->group(function () {
     Route::get('/mahangarpalika-zones', function () {
         return view('zone.index');
     })->name('mahangarpalika-zones.index');
-    
+
     Route::get('/mahangarpalika-wards', function(){
         return view('mahanagarpalika-wards.index');
     })->name('mahangarpalika-wards.index');
 
+    Route::post('/import_excel/import',[App\Http\Controllers\MahanagarpalikawardController::class, 'imports']);
+    Route::get('export-excel', [App\Http\Controllers\MahanagarpalikawardController::class, 'export']);
+
     Route::get('/nagarparishads', function(){
         return view('nagarparishad.index');
     })->name('nagarparishads.index');
+    Route::post('/import_excel/import',[App\Http\Controllers\NagarpalikaController::class, 'imports']);
+    Route::get('export-excel', [App\Http\Controllers\NagarpalikaController::class, 'export']);
+
+
     
     Route::get('/nagarparishad-wards', function(){
         return view('nagarparishad-wards.index');
     })->name('nagarparishad-wards.index');
+
+    Route::post('/import_excel/import',[App\Http\Controllers\NagarparishadWardController::class, 'imports']);
+    Route::get('export-excel', [App\Http\Controllers\NagarparishadWardController::class, 'export']);
 
     Route::get('/admin/index', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 

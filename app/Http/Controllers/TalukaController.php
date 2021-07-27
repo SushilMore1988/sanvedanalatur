@@ -129,7 +129,7 @@ class TalukaController extends Controller
  
     public function export() 
     {
-        return Excel::download(new ExportTaluka, 'states.xlsx');
+        return Excel::download(new ExportTaluka, 'taluka.xlsx');
     }
 
 }
