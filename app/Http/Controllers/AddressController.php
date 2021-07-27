@@ -5,6 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\AddressProof;
 use App\Models\Role;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportAddress;
+use App\Exports\ExportAddress;
 use Spatie\Permission\Models\Permission;
 
 class AddressController extends Controller
@@ -114,4 +119,54 @@ class AddressController extends Controller
         return redirect()->route('address-proofs.index')
                         ->with('success','address-proof deleted successfully');
     }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'type'  => $row['type'],
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('address_proofs')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportAddress,'Address.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportAddress,'Addresslist.csv');
+    }
+
+    public function importe(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportAddress, request()->file('import_file'));
+        return back()->with('success', 'Address imported successfully.');
+    }
+ 
+    public function exports() 
+    {
+        return Excel::download(new ExportAddress, 'Address.xlsx');
+    }
+
+
 }

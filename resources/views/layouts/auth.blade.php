@@ -482,12 +482,24 @@
                             <div class="media">
                                 <i class="fas fa-user mr-3"></i> 
                                 <div class="media-body">
+                                    <a href="{{route('testimonial.index')}}" class="list-group-item ">
+                                        <p class=" p-semibold f-14 mb-0">Testimonials</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+
+                        <li>
+                            <div class="media">
+                                <i class="fas fa-user mr-3"></i> 
+                                <div class="media-body">
                                     <a href="{{route('nagarparishad-wards.index')}}" class="list-group-item ">
                                         <p class=" p-semibold f-14 mb-0">Settings</p>
                                     </a>
                                 </div>
                             </div>
                         </li>
+                        
                         {{-- @endcan --}}
                     </ul>
                 </div>

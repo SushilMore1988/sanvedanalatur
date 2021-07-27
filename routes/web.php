@@ -61,7 +61,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/divyang-goods/edit/{id}', [App\Http\Controllers\GoodsController::class, 'edit'])->name('divyang-goods.edit');
     Route::patch('/divyang-goods/update/{id}', [App\Http\Controllers\GoodsController::class, 'update'])->name('divyang-goods.update');
     Route::delete('/divyang-goods/destroy/{id}', [App\Http\Controllers\GoodsController::class, 'destroy'])->name('divyang-goods.destroy');
-
+    Route::post('/import_excel/imports',[App\Http\Controllers\GoodsController::class, 'importes']);
+    Route::get('export-excels', [App\Http\Controllers\GoodsController::class, 'exports']);
     /*--------------------------------------------------Disability Types----------------------------------------------------------------------------*/
     
     Route::get('/disability-types', [App\Http\Controllers\DisabilityTypesController::class, 'index'])->name('disability-types.index');
@@ -94,7 +95,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/disability-reasons/edit/{id}', [App\Http\Controllers\ReasonController::class, 'edit'])->name('disability-reasons.edit');
     Route::patch('/disability-reasons/update/{id}', [App\Http\Controllers\ReasonController::class, 'update'])->name('disability-reasons.update');
     Route::delete('/disability-reasons/destroy/{id}', [App\Http\Controllers\ReasonController::class, 'destroy'])->name('disability-reasons.destroy');
-
+    Route::post('/import_excel/imported',[App\Http\Controllers\ReasonController::class, 'importes']);
+    Route::get('export-excelse', [App\Http\Controllers\ReasonController::class, 'exports']);
     /*-------------------------------------------------Identity proofs------------------------------------------------------------------------------*/
 
     Route::get('/identity-proofs', [App\Http\Controllers\IdentityController::class, 'index'])->name('identity-proofs.index');
@@ -104,6 +106,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/identity-proofs/edit/{id}', [App\Http\Controllers\IdentityController::class, 'edit'])->name('identity-proofs.edit');
     Route::patch('/identity-proofs/update/{id}', [App\Http\Controllers\IdentityController::class, 'update'])->name('identity-proofs.update');
     Route::delete('/identity-proofs/destroy/{id}', [App\Http\Controllers\IdentityController::class, 'destroy'])->name('identity-proofs.destroy');
+    Route::post('/import_excel/imported',[App\Http\Controllers\IdentityController::class, 'importe']);
+    Route::get('export-excelse', [App\Http\Controllers\IdentityController::class, 'exports']);
 
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
 
@@ -116,7 +120,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/address-proofs/edit/{id}', [App\Http\Controllers\AddressController::class, 'edit'])->name('address-proofs.edit');
     Route::patch('/address-proofs/update/{id}', [App\Http\Controllers\AddressController::class, 'update'])->name('address-proofs.update');
     Route::delete('/address-proofs/destroy/{id}', [App\Http\Controllers\AddressController::class, 'destroy'])->name('address-proofs.destroy');
-
+    Route::post('/import_excel/imported',[App\Http\Controllers\AddressController::class, 'importe']);
+    Route::get('export-excelse', [App\Http\Controllers\AddressController::class, 'exports']);    
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/
 
     /*-------------------------------------------------Hospitals------------------------------------------------------------------------------*/
@@ -128,7 +133,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/hospitals/edit/{id}', [App\Http\Controllers\HospitalController::class, 'edit'])->name('hospitals.edit');
     Route::patch('/hospitals/update/{id}', [App\Http\Controllers\HospitalController::class, 'update'])->name('hospitals.update');
     Route::delete('/hospitals/destroy/{id}', [App\Http\Controllers\HospitalController::class, 'destroy'])->name('hospitals.destroy');
-
+    Route::post('/import_excel/imported',[App\Http\Controllers\HospitalController::class, 'importe']);
+    Route::get('export-excelse', [App\Http\Controllers\HospitalController::class, 'exports']);    
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     /*-------------------------------------------------Occupations------------------------------------------------------------------------------*/
@@ -140,7 +146,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/occupations/edit/{id}', [App\Http\Controllers\OccupationController::class, 'edit'])->name('occupations.edit');
     Route::patch('/occupations/update/{id}', [App\Http\Controllers\OccupationController::class, 'update'])->name('occupations.update');
     Route::delete('/occupations/destroy/{id}', [App\Http\Controllers\OccupationController::class, 'destroy'])->name('occupations.destroy');
-
+    Route::post('/import_excel/imported',[App\Http\Controllers\OccupationController::class, 'importe']);
+    Route::get('export-excelse', [App\Http\Controllers\OccupationController::class, 'exports']);    
     /*----------------------------------------------------------------------------------------------------------------------------------------------*/    
 
     /*--------------------------------------------------Countries------------------------------------------------------------------------------------*/    
@@ -240,5 +247,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/admin/index', [App\Http\Controllers\AdminController::class, 'index'])->name('admin.index');
 
     // Route::get('/admin/create', [App\Http\Controllers\AdminController::class, 'create'])->name('admin.create');
+   
+        /*--------------------------------------------------Testimonials------------------------------------------------------------------------------------*/
+        Route::get('/testimonial.index', [App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonial.index');
+        Route::get('/testimonial/show/{id}', [App\Http\Controllers\TestimonialController::class, 'show'])->name('testimonial.show');
+        Route::get('/testimonial/create', [App\Http\Controllers\TestimonialController::class, 'create'])->name('testimonial.create');
+        Route::post('/testimonial/store', [App\Http\Controllers\TestimonialController::class, 'store'])->name('testimonial.store');
+        Route::get('/testimonial/edit/{id}', [App\Http\Controllers\TestimonialController::class, 'edit'])->name('testimonial.edit');
+        Route::patch('/testimonial/update/{id}', [App\Http\Controllers\TestimonialController::class, 'update'])->name('testimonial.update');
+        Route::delete('/testimonial/destroy/{id}', [App\Http\Controllers\TestimonialController::class, 'destroy'])->name('testimonial.destroy');
     
 });

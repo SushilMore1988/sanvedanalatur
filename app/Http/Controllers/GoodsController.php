@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DivyangGoods;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportGoods;
+use App\Exports\ExportGoods;
 
 class GoodsController extends Controller
 {
@@ -111,4 +116,54 @@ class GoodsController extends Controller
         return redirect()->route('divyang-goods.index')
                         ->with('success','Goods deleted successfully');
     }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'type'  => $row['type'],
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('divyang_goods')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportGoods,'Goods.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportGoods,'Goodslist.csv');
+    }
+
+    public function importes(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportGoods, request()->file('import_file'));
+        return back()->with('success', 'Goods imported successfully.');
+    }
+ 
+    public function exports() 
+    {
+        return Excel::download(new ExportGoods, 'Goods.xlsx');
+    }
+
+
 }

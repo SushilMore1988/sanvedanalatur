@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Hospital;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Imports\ImportHospital;
+use App\Exports\ExportHospital;
 
 class HospitalController extends Controller
 {
@@ -111,4 +116,54 @@ class HospitalController extends Controller
         return redirect()->route('hospitals.index')
                         ->with('success','Hospital deleted successfully');
     }
+    function import(Request $request)
+    {
+        $this->validate($request, [
+            'select_file'  => 'required|mimes:xls,xlsx'
+        ]);
+
+        $path = $request->file('select_file')->getRealPath();
+
+        $data = Excel::load($path)->get();
+
+        if($data->count() > 0)
+        {
+            foreach($data->toArray() as $key => $value){
+                foreach($value as $row){
+                    $insert_data[] = array(
+                    'type'  => $row['type'],
+                    );
+                }
+            }
+
+            if(!empty($insert_data)){
+                DB::table('hospitals')->insert($insert_data);
+            }
+        }
+        return back()->with('success', 'Excel Data Imported successfully.');
+    }
+
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportHospital,'Hospital.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportHospital,'Hospitallist.csv');
+    }
+
+    public function importe(Request $request){
+        $request->validate([
+            'import_file' => 'required'
+        ]);
+        Excel::import(new ImportHospital, request()->file('import_file'));
+        return back()->with('success', 'Hospital imported successfully.');
+    }
+ 
+    public function exports() 
+    {
+        return Excel::download(new ExportHospital, 'Hospital.xlsx');
+    }
+
+
 }

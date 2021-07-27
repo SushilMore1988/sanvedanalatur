@@ -21,6 +21,15 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+        <form method="post" enctype="multipart/form-data" action="{{ url('/import_excel/imports') }}">
+                    {{ csrf_field() }}
+                    {{-- <label>Select File for Upload</label> --}}
+            
+                    <input type="file" name="import_file" />
+            
+                    <button class="btn btn-success">Import File</button>
+                    <a class="btn btn-info" href="{{ url('export-excels') }}">Export File</a>
+                </form> 
             <table id="datatable" class="table table-bordered table-hover" style="width:100%">
                 <tr>
                     <th>No</th>
