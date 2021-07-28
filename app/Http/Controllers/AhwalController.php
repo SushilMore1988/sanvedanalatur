@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Caste;
 use App\Models\DisabilityType;
 use App\Models\Divyang;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+use App\Exports\ExportEducation;
 use Illuminate\Support\Facades\DB;
 
 class AhwalController extends Controller
@@ -32,7 +35,18 @@ class AhwalController extends Controller
              'Doctorate'];
         return view('ahwal.education', compact('disabilityTypes', 'educations'));
     }
-
+    public function exportIntoExcel()
+    {
+        return Excel::download(new ExportEducation,'Education.xlsx');
+    }
+    
+    public function exportIntoCSV(){
+        return Excel::download(new ExportEducation,'Education.csv');
+    }
+    public function exports() 
+    {
+        return Excel::download(new ExportEducation, 'Education.xlsx');
+    }
     public function maritalStatus()
     {
         $disabilityTypes = DisabilityType::all();

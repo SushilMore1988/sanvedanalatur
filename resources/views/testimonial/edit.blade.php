@@ -32,7 +32,7 @@
     @endif
 
 
-    {!! Form::model($testimonials, ['method' => 'PATCH','route' => ['testimonial/update', $testimonials->id]]) !!}
+    {!! Form::model($testimonials, ['method' => 'PATCH','route' => ['testimonial.update', $testimonials->id]]) !!}
     <div class="row">
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
@@ -42,8 +42,8 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
-            <strong>Description:</strong>
-            {!! Form::text('description', null, array('placeholder' => 'Deescription','class' => 'form-control')) !!}
+            <strong>Discription:</strong>
+            {!! Form::text('discription', null, array('placeholder' => 'Discription','class' => 'form-control')) !!}
         </div>
     </div><div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">

@@ -34,6 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ahwal/gov-scheme', [App\Http\Controllers\AhwalController::class, 'govScheme'])->name('ahwal.gov-scheme');
     Route::get('/ahwal/personal-toilet', [App\Http\Controllers\AhwalController::class, 'personalToilet'])->name('ahwal.personal-toilet');
     Route::get('/ahwal/home', [App\Http\Controllers\AhwalController::class, 'home'])->name('ahwal.home');
+    Route::get('export-excelse', [App\Http\Controllers\AhwalController::class, 'exports']);
 
     Route::get('/areas/{area}', [App\Http\Controllers\AreaController::class, 'index'])->name('areas.index');
 
@@ -249,7 +250,7 @@ Route::middleware('auth')->group(function () {
     // Route::get('/admin/create', [App\Http\Controllers\AdminController::class, 'create'])->name('admin.create');
    
         /*--------------------------------------------------Testimonials------------------------------------------------------------------------------------*/
-        Route::get('/testimonial.index', [App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonial.index');
+        Route::get('/testimonial/index', [App\Http\Controllers\TestimonialController::class, 'index'])->name('testimonial.index');
         Route::get('/testimonial/show/{id}', [App\Http\Controllers\TestimonialController::class, 'show'])->name('testimonial.show');
         Route::get('/testimonial/create', [App\Http\Controllers\TestimonialController::class, 'create'])->name('testimonial.create');
         Route::post('/testimonial/store', [App\Http\Controllers\TestimonialController::class, 'store'])->name('testimonial.store');

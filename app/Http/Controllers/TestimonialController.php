@@ -39,16 +39,16 @@ class TestimonialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request,Testimonial $testimonial)
+    public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required',
-            'description' => 'required',
-            'img' => 'required',
+            'name' => 'required|unique:testimonials,name',
+            'discription' => 'required|unique:testimonials,discription',
+            'img' => 'required|unique:testimonials,img',
 
         ]);
 
-        Testimonial::create(['name' => $request->name,'description'=>$request->description,'img'=>$request->img]);
+        Testimonial::create(['name' => $request->name,'discription'=>$request->discription,'img'=>$request->img]);
     
     
         return redirect()->route('testimonial.index')
@@ -74,7 +74,7 @@ class TestimonialController extends Controller
      * @param  \App\Models\Testimonial  $testimonial
      * @return \Illuminate\Http\Response
      */
-    public function edit(Testimonial $testimonial)
+    public function edit($id)
     {
         $testimonials = Testimonial::find($id);
         return view('testimonial.edit',compact('testimonials'));
@@ -91,14 +91,14 @@ class TestimonialController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'description' => 'required',
+            'discription' => 'required',
             'img' => 'required',
 
         ]);
     
         $testimonials = Testimonial::find($id);
         $testimonials->name = $request->input('name');
-        $testimonials->description = $request->input('description');
+        $testimonials->discription = $request->input('discription');
         $testimonials->img = $request->input('img');
         $testimonials->save();
 
@@ -114,7 +114,7 @@ class TestimonialController extends Controller
      */
     public function destroy($id)
     {
-        testimonials::find($id)->delete();
+        testimonial::find($id)->delete();
         return redirect()->route('testimonial.index')
                         ->with('success','Testimonial area deleted successfully');
     }

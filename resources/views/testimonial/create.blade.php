@@ -15,7 +15,7 @@
                 <h2>Add New Testimonial</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('testimonial/index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('testimonial.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -33,7 +33,7 @@
     @endif
     
     
-    {!! Form::open(array('route' => 'testimonial/store','method'=>'POST')) !!}
+    {!! Form::open(array('route' => 'testimonial.store','method'=>'POST')) !!}
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
@@ -43,8 +43,8 @@
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Deescription:</strong>
-                {!! Form::text('description', null, array('placeholder' => 'Description','class' => 'form-control')) !!}
+                <strong>Discription:</strong>
+                {!! Form::text('discription', null, array('placeholder' => 'Discription','class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12">

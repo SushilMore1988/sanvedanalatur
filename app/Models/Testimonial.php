@@ -8,10 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Testimonial extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    
     protected $fillable = [
         'id',
         'name',
-        'description',
+        'discription',
         'img',
 
     ];
