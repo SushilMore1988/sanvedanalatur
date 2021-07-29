@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Imports\ImportNagarparishadWard;
-use App\Exports\ExportNagarparishadWard;
+use App\Exports\ExportNagarparishadWardNumber;
 
 class NagarparishadwardController extends Controller
 {
@@ -133,6 +133,6 @@ class NagarparishadwardController extends Controller
         
             public function export() 
             {
-                return Excel::download(new ExportNagarparishadWard, 'Nagarparishad.xlsx');
+                return Excel::download(new ExportNagarparishadWardNumber, 'Nagarparishad.xlsx');
             }
 }

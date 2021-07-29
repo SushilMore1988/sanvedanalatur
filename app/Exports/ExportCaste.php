@@ -2,16 +2,16 @@
 
 namespace App\Exports;
 
-use App\Models\NagarparishadWard;
+use App\Models\Caste;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class ExportNagarparishadWard implements FromCollection
+class ExportCaste implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
     public function collection()
     {
-        return NagarparishadWard::all();
+        return Caste::all();
     }
 }

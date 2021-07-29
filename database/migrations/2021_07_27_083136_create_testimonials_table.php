@@ -29,6 +29,6 @@ class CreateTestimonialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('testimonial');
+        Schema::dropIfExists('testimonials');
     }
 }

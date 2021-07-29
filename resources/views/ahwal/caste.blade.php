@@ -10,6 +10,11 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+        <form method="post" enctype="multipart/form-data" action="">
+                    {{ csrf_field() }}
+                    <!-- {{-- <label>Select File for Upload</label> --}} -->
+                    <a class="btn btn-info" href="{{ url('ahwal/caste') }}">Export File</a>
+                </form> 
             <table class="table table-bordered table-hover" style="width:100%;font-size:11px;">
                 <thead>
                     <tr>
@@ -45,7 +50,7 @@
                                 @if($count <= 0)
                                     <td>{{ $count }}</td>
                                 @else
-                                    <td><a href="{{ url("divyang?disability_type=$disabilityType->type&parameter=caste_id&caste_id=$caste->id")}}">{{ $count }}</a></td>
+                                    <td><a href="{{ url("divyang?disability_type=$disabilityType->type&parameter=caste_id&caste_id=$caste->id")}}">{{ $count }} Export</a></td>
                                 @endif
                             @endforeach
                             {{-- <td>{{ $total }}</td> --}}

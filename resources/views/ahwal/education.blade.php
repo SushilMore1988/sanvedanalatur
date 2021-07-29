@@ -10,10 +10,10 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-        <form method="post" enctype="multipart/form-data" action="{{ url('/export-excelse') }}">
+         <form method="post" enctype="multipart/form-data" action="">
                     {{ csrf_field() }}
                     {{-- <label>Select File for Upload</label> --}}
-                    <a class="btn btn-info" href="{{ url('export-excelse') }}">Export File</a>
+                    <a class="btn btn-info" href="{{ url('/ahwal/education') }}">Export File</a>
                 </form> 
             <table class="table table-bordered table-hover" style="width:100%;font-size:11px;">
                 <thead>

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Caste extends Model
 {
     use HasFactory;
+    public function Caste()
+    {
+        return $this->belongsTo('App\Models\Caste');
+    }
 }
