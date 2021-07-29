@@ -258,4 +258,22 @@ Route::middleware('auth')->group(function () {
         Route::patch('/testimonial/update/{id}', [App\Http\Controllers\TestimonialController::class, 'update'])->name('testimonial.update');
         Route::delete('/testimonial/destroy/{id}', [App\Http\Controllers\TestimonialController::class, 'destroy'])->name('testimonial.destroy');
     
+                /*--------------------------------------------------Aboutus------------------------------------------------------------------------------------*/
+        Route::get('/about/index', [App\Http\Controllers\AboutController::class, 'index'])->name('about.index');
+        Route::get('/about/show/{id}', [App\Http\Controllers\AboutController::class, 'show'])->name('about.show');
+        Route::get('/about/create', [App\Http\Controllers\AboutController::class, 'create'])->name('about.create');
+        Route::post('/about/store', [App\Http\Controllers\AboutController::class, 'store'])->name('about.store');
+        Route::get('/about/edit/{id}', [App\Http\Controllers\AboutController::class, 'edit'])->name('about.edit');
+        Route::patch('/about/update/{id}', [App\Http\Controllers\AboutController::class, 'update'])->name('about.update');
+        Route::delete('/about/destroy/{id}', [App\Http\Controllers\AboutController::class, 'destroy'])->name('about.destroy');
+
+        /*--------------------------------------------------Goverment------------------------------------------------------------------------------------*/
+        Route::get('/goverment/index', [App\Http\Controllers\GovermentController::class, 'index'])->name('goverment.index');
+        Route::get('/goverment/show/{id}', [App\Http\Controllers\GovermentController::class, 'show'])->name('goverment.show');
+        Route::get('/goverment/create', [App\Http\Controllers\GovermentController::class, 'create'])->name('goverment.create');
+        Route::post('/goverment/store', [App\Http\Controllers\GovermentController::class, 'store'])->name('goverment.store');
+        Route::get('/goverment/edit/{id}', [App\Http\Controllers\GovermentController::class, 'edit'])->name('goverment.edit');
+        Route::patch('/goverment/update/{id}', [App\Http\Controllers\GovermentController::class, 'update'])->name('goverment.update');
+        Route::delete('/goverment/destroy/{id}', [App\Http\Controllers\GovermentController::class, 'destroy'])->name('goverment.destroy');
+
 });

@@ -482,6 +482,27 @@
                             <div class="media">
                                 <i class="fas fa-user mr-3"></i> 
                                 <div class="media-body">
+                                    <a href="{{route('about.index')}}" class="list-group-item ">
+                                        <p class=" p-semibold f-14 mb-0">AboutUs</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="media">
+                                <i class="fas fa-user mr-3"></i> 
+                                <div class="media-body">
+                                    <a href="{{route('goverment.index')}}" class="list-group-item ">
+                                        <p class=" p-semibold f-14 mb-0">Goverment</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li>
+                            <div class="media">
+                                <i class="fas fa-user mr-3"></i> 
+                                <div class="media-body">
                                     <a href="{{route('testimonial.index')}}" class="list-group-item ">
                                         <p class=" p-semibold f-14 mb-0">Testimonials</p>
                                     </a>
