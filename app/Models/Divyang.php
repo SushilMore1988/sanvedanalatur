@@ -31,6 +31,86 @@ class Divyang extends Model
         return $this->belongsToMany(DisabilityArea::class);
     }
 
+    public function religion()
+    {
+        return $this->belongsTo(Religion::class);
+    }
+
+    public function caste()
+    {
+        return $this->belongsTo(Caste::class);
+    }
+
+    public function mahanagarpalika()
+    {
+        return $this->belongsTo(Mahanagarpalika::class);
+    }
+
+    public function zone()
+    {
+        return $this->belongsTo(Zone::class);
+    }
+
+    public function mahanagarpalikaWardNumber()
+    {
+        return $this->belongsTo(MahanagarpalikaWardNumber::class);
+    }
+
+    public function village()
+    {
+        return $this->belongsTo(Village::class);
+    }
+
+    public function nagarparishad()
+    {
+        return $this->belongsTo(Nagarparishad::class);
+    }
+
+    public function nagarparishadWardNumber()
+    {
+        return $this->belongsTo(NagarparishadWardNumber::class);
+    }
+
+    public function taluka()
+    {
+        return $this->belongsTo(Taluka::class);
+    }
+
+    public function district()
+    {
+        return $this->belongsTo(District::class);
+    }
+
+    public function state()
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    public function reason()
+    {
+        return $this->belongsTo(DisabilityReason::class);
+    }
+
+    public function hospital()
+    {
+        return $this->belongsTo(Hospital::class);
+    }
+
+    public function divyangGoods()
+    {
+        return $this->belongsTo(DivyangGoods::class);
+    }
+
+    public function occupation()
+    {
+        return $this->belongsTo(Occupation::class);
+    }
+
+    public function identityProof()
+    {
+        return $this->belongsTo(IdentityProof::class);
+    }
+
     public function scopeWithArea($query)
     {
         $user = User::find(Auth::id());
