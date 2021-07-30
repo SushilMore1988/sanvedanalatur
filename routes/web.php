@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ahwal/gov-scheme', [App\Http\Controllers\AhwalController::class, 'govScheme'])->name('ahwal.gov-scheme');
     Route::get('/ahwal/personal-toilet', [App\Http\Controllers\AhwalController::class, 'personalToilet'])->name('ahwal.personal-toilet');
     Route::get('/ahwal/home', [App\Http\Controllers\AhwalController::class, 'home'])->name('ahwal.home');
-    Route::get('/ahwal/caste', [App\Http\Controllers\AhwalController::class, 'export'])->name('ahwal.caste');
+    Route::get('/ahwal/caste/export', [App\Http\Controllers\AhwalController::class, 'export'])->name('ahwal.caste.export');
     Route::get('/ahwal/education', [App\Http\Controllers\AhwalController::class, 'exports'])->name('ahwal.education');
     Route::get('/ahwal/marital-status', [App\Http\Controllers\AhwalController::class, 'exportd'])->name('ahwal.marital-status');
     Route::get('/ahwal/gov-scheme', [App\Http\Controllers\AhwalController::class, 'exporte'])->name('ahwal.gov-scheme');
