@@ -5,7 +5,7 @@ namespace App\Exports;
 use App\Models\DisabilityType;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class ExportEducation implements FromCollection
+class ExportGovermentScheme implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection

@@ -10,11 +10,12 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
-        <form method="post" enctype="multipart/form-data" action="">
-                    {{ csrf_field() }}
-                    <!-- {{-- <label>Select File for Upload</label> --}} -->
-                    <a class="btn btn-info" href="{{ url('ahwal/caste') }}">Export File</a>
-                </form> 
+        <form method="POST"  enctype="multipart/form-data">
+                @csrf
+                 
+            <a class="btn btn-info" href="{{ url('/ahwal/caste') }}"> 
+                 Export File</a>
+            </form>
             <table class="table table-bordered table-hover" style="width:100%;font-size:11px;">
                 <thead>
                     <tr>
