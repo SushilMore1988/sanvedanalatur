@@ -8,7 +8,6 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Exports\ExportDivyang;
-
 use Illuminate\Http\Request;
 
 class DivyangController extends Controller
@@ -42,6 +41,7 @@ class DivyangController extends Controller
     {
         return view('divyang.show', compact('divyang'));
     }
+
     public function exports() 
     {
         return Excel::download(new ExportDivyang, 'Divyang.xlsx');

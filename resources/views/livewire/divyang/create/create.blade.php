@@ -280,6 +280,7 @@
                                                             <div class="input-group ">
                                                                 <div class="custom-file">
                                                                     {!! Form::file('photo', ['class' => 'custom-file-input', 'wire:model' => 'photo']) !!}
+                                                                    <a class="btn btn-info" href="{{ url('/') }}"></a>
                                                                     <label class="custom-file-label">Choose file</label>
                                                                 </div>
                                                             </div>
@@ -330,6 +331,7 @@
                                                             <div class="input-group ">
                                                                 <div class="custom-file">
                                                                     {!! Form::file('signature', ['class' => 'custom-file-input', 'wire:model' => 'signature']) !!}
+                                                                    <a class="btn btn-info" href="{{ url('/') }}"></a>
                                                                     <label class="custom-file-label" >Choose file</label>
                                                                 </div>
                                                             </div>
