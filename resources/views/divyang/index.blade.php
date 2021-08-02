@@ -21,6 +21,10 @@
     </div>
     <div class="row">
         <div class="col-lg-12">
+        <form method="post" enctype="multipart/form-data" action="">
+                    {{ csrf_field() }}
+                    <a class="btn btn-info" href="{{ url('/divyangs') }}">Export File</a>
+                </form> 
             <table id="datatable" class="table table-bordered table-hover" style="width:100%">
                 <tr>
                     <th>No</th>

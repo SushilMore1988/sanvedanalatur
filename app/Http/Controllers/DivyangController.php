@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\DisabilityType;
 use App\Models\Divyang;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
+use App\Exports\ExportDivyang;
+
 use Illuminate\Http\Request;
 
 class DivyangController extends Controller
@@ -36,5 +41,9 @@ class DivyangController extends Controller
     public function show(Divyang $divyang)
     {
         return view('divyang.show', compact('divyang'));
+    }
+    public function exports() 
+    {
+        return Excel::download(new ExportDivyang, 'Divyang.xlsx');
     }
 }

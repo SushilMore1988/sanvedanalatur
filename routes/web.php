@@ -37,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/ahwal/caste', [App\Http\Controllers\AhwalController::class, 'export'])->name('ahwal.caste');
     Route::get('/ahwal/education', [App\Http\Controllers\AhwalController::class, 'exports'])->name('ahwal.education');
     Route::get('/ahwal/marital-status', [App\Http\Controllers\AhwalController::class, 'exportd'])->name('ahwal.marital-status');
-    Route::get('/ahwal/gov-scheme', [App\Http\Controllers\AhwalController::class, 'exporte'])->name('ahwal.gov-scheme');
+    Route::get('/status', [App\Http\Controllers\AhwalController::class, 'exporte'])->name('ahwal.gov-scheme');
 
 
 
@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('permissions', App\Http\Controllers\PermissionController::class);
     
     Route::get('/divyang', [App\Http\Controllers\DivyangController::class, 'index'])->name('divyang.index');
+    Route::get('/divyangs', [App\Http\Controllers\DivyangController::class, 'exports'])->name('divyang.index');
     Route::get('/divyang/show/{divyang}', [App\Http\Controllers\DivyangController::class, 'show'])->name('divyang.show');
     
     Route::get('/divyang/edit/{divyang}', [App\Http\Controllers\DivyangController::class, 'edit'])->name('divyang.edit');
