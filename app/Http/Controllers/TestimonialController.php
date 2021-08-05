@@ -44,9 +44,14 @@ class TestimonialController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:testimonials,name',
             'discription' => 'required|unique:testimonials,discription',
-            'img' => 'required|unique:testimonials,img',
+            // 'img' => 'required|unique:testimonials,img',
 
         ]);
+        if ($request->file('img') == null) {
+            $file = "/storage/Testimonial";
+        }else{
+           $file = $request->file('img')->store('images');  
+        }
 
         Testimonial::create(['name' => $request->name,'discription'=>$request->discription,'img'=>$request->img]);
     

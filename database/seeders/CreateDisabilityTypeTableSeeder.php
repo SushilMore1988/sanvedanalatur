@@ -35,7 +35,8 @@ class CreateDisabilityTypeTableSeeder extends Seeder
             ['type' => 'Sickle Cell Disease'],
             ['type' => 'Specific Learning Disabilities'],
             ['type' => 'Speech and Language Disability'],
-            ['type' => 'Thalassemia']
+            ['type' => 'Thalassemia'],
+            ['type' => 'Disability']
         ]);
     }
 }

@@ -13,7 +13,7 @@
          <form method="post" enctype="multipart/form-data" action="">
                     {{ csrf_field() }}
                     {{-- <label>Select File for Upload</label> --}}
-                    <a class="btn btn-info" href="{{ url('/ahwal/education') }}">Export File</a>
+                    <a class="btn btn-info" href="{{ url('/ahwal/education/exports') }}">Export File</a>
                 </form> 
             <table class="table table-bordered table-hover" style="width:100%;font-size:11px;">
                 <thead>
@@ -61,6 +61,33 @@
                         @endif
                     </tr>
                     @endforeach
+
+                    <tr>
+                        <td>Disability</td>
+                        @php
+                            $i = 0;
+                            $grandTotal = 0;
+                        @endphp
+                        @foreach($educations as $education)
+                            {{-- <td>{{ $totalArray[$i] }}</td> --}}
+                            @if($totalArray[$i] <= 0)
+                                <td>{{ $totalArray[$i] }}</td>
+                            @else
+                                <td><a href="{{ url("divyang?parameter=education&education=$education")}}">{{ $totalArray[$i] }}</a></td>
+                            @endif
+                            @php
+                                $grandTotal += $totalArray[$i];
+                                $i++;
+                            @endphp
+                        @endforeach
+                        {{-- <td>{{ $grandTotal }}</td> --}}
+                        @if($grandTotal <= 0)
+                            <td>{{ $grandTotal }}</td>
+                        @else
+                            <td><a href="{{ url("divyang")}}">{{ $grandTotal }}</a></td>
+                        @endif
+                    </tr>
+                
 
                     <tr>
                         <td>Total</td>

@@ -58,6 +58,17 @@
                     </tr>
                     @endforeach
                     <tr>
+                        <td>Disability</td>
+                        <td><a href="{{ url("divyang?parameter=home&home=1")}}">{{ $totalArray[0] }}</a></td>
+                        <td><a href="{{ url("divyang?parameter=home&home=0")}}">{{ $totalArray[1] }}</a></td>
+                        @if(($totalArray[0] + $totalArray[1]) <= 0)
+                            <td>{{ $totalArray[0] + $totalArray[1] }}</td>
+                        @else
+                            <td><a href="{{ url("divyang")}}">{{ $totalArray[0] + $totalArray[1] }}</a></td>
+                        @endif
+                    </tr>
+
+                    <tr>
                         <td>Total</td>
                         <td><a href="{{ url("divyang?parameter=home&home=1")}}">{{ $totalArray[0] }}</a></td>
                         <td><a href="{{ url("divyang?parameter=home&home=0")}}">{{ $totalArray[1] }}</a></td>

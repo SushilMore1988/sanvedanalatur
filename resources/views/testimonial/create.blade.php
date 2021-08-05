@@ -51,7 +51,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Image:</strong>
-                {!! Form::file('img', null, array('placeholder' => 'Image','class' => 'form-control')) !!}
+                {!! Form::file('img', null, array('placeholder' => 'Image','id'=>"img", 'class' => 'form-control')) !!}
             </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">

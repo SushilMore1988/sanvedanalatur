@@ -5,7 +5,7 @@ use App\Models\Caste;
 use App\Models\DisabilityType;
 // use App\Models\MartialStatus;
 use App\Models\Divyang;
-use Maatwebsite\Excel\Facades\Excel;
+ use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Controller;
 use App\Exports\ExportCaste;
 use App\Exports\ExportEducation;
@@ -21,10 +21,10 @@ class AhwalController extends Controller
         $castes = Caste::all();
         return view('ahwal.caste', compact('disabilityTypes', 'castes'));
     }
-    public function export() 
-    {
-        return Excel::download(new ExportCaste, 'Caste.xlsx');
-    }
+    // public function export() 
+    // {
+    //     return Excel::download(new ExportCaste, 'Caste.xlsx');
+    // }
 
     public function education()
     {
@@ -42,10 +42,39 @@ class AhwalController extends Controller
              'Doctorate'];
         return view('ahwal.education', compact('disabilityTypes', 'educations'));
     }
-    public function exports() 
-    {
-        return Excel::download(new ExportEducation, 'Education.xlsx');
-    }
+
+    // public function export_list()
+    // {
+    //     $educations = DB::table('disability_types')->get()->toArray();
+	// 	$programma_array[] = array('type');
+	
+	// 	foreach($educations as $education)
+	// 	{
+    //         //dd($educations);
+
+	// 		$programma_array[] = array
+	// 		(
+	// 		'type'  => $education->type,
+			
+    //   		);
+			
+	// 	}
+		
+			
+	// 		Excel::store('Programma_Data', function($excel) use ($programma_array)
+	// 		{
+	// 			$excel->setTitle('Apotelesmata');
+	// 			$excel->sheet('Programma_Data', function($sheet) use ($programma_array)
+                
+	// 			{
+	// 				$sheet->fromArray($programma_array, null, 'A1', false, false);
+	// 			});
+	// 		})->export('xls');
+
+	     
+    // }
+			   
+		
 
     public function maritalStatus()
     {

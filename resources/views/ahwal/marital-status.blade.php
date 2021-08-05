@@ -63,6 +63,32 @@
                     @endforeach
                     
                     <tr>
+                        <td>Disability</td>
+                        @php
+                            $i = 0;
+                            $grandTotal = 0;
+                        @endphp
+                        @foreach($maritalStatus as $caste)
+                            {{-- <td>{{ $totalArray[$i] }}</td> --}}
+                            @if($totalArray[$i] <= 0)
+                                <td>{{ $totalArray[$i] }}</td>
+                            @else
+                                <td><a href="{{ url("divyang?parameter=marital_status&marital_status=$caste")}}">{{ $totalArray[$i] }}</a></td>
+                            @endif
+                            @php
+                                $grandTotal += $totalArray[$i];
+                                $i++;
+                            @endphp
+                        @endforeach
+                        {{-- <td>{{ $grandTotal }}</td> --}}
+                        @if($grandTotal <= 0)
+                            <td>{{ $grandTotal }}</td>
+                        @else
+                            <td><a href="{{ url("divyang")}}">{{ $grandTotal }}</a></td>
+                        @endif
+                    </tr> 
+
+                    <tr>
                         <td>Total</td>
                         @php
                             $i = 0;

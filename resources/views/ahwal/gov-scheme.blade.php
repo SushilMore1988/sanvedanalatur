@@ -66,6 +66,20 @@
                     @endforeach
                     
                     <tr>
+                        <td>Disability</td>
+                        @php
+                            $grandTotal = $totalArray[0] + $totalArray[1];
+                        @endphp
+                        <td><a href="{{ url("divyang?parameter=government_scheme&government_scheme=1")}}">{{ $totalArray[0] }}</a></td>
+                        <td><a href="{{ url("divyang?parameter=government_scheme&government_scheme=0")}}">{{ $totalArray[1] }}</a></td>
+                        @if($grandTotal <= 0)
+                            <td>{{ $grandTotal }}</td>
+                        @else
+                            <td><a href="{{ url("divyang")}}">{{ $grandTotal }}</a></td>
+                        @endif
+                    </tr>
+
+                    <tr>
                         <td>Total</td>
                         @php
                             $grandTotal = $totalArray[0] + $totalArray[1];
