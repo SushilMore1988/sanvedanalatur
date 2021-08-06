@@ -564,6 +564,7 @@
                                                         @endif
                                                     </div>
                                                 </div>
+                                               
                                                 <div class="form-row pb-2">
                                                     <div class="form-group col-md-6">
                                                         <div class="row">
@@ -740,6 +741,18 @@
                                                     </div>
                                                 @endif
                                             </div>
+                                            <div class="form-group col-md-4">
+                                                        <label for="inputEmail4" class="f-14 text-dark p-regular">Multiple Disability Type <span class="text-danger">*</span></label>
+                                                        <div class="input-group mb-3">
+                                                            {!! Form::checkbox('is_multiple_disability_type	', $type->id, null, null, ['class' => 'is_multiple_disability_type', 'wire:model' => 'is_multiple_disability_type', 'placeholder' => 'Select is_multiple_disability_type for  is_multiple_disability_type']) !!}
+                                                        </div>
+                                                        @if ($errors->has('is_multiple_disability_type')) 
+                                                            <div class="invalid-feedback d-block mt-1">  
+                                                                {{ $errors->first('is_multiple_disability_type') }}
+                                                            </div>
+                                                        @endif
+                                                    </div>
+                                                </div>
                                             <div class="form-group col-md-4 pt-4 px-md-3">
                                                 <div class="form-row pb-4 pt-1">
                                                     <div class="col-6"> 

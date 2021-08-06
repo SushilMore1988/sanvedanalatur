@@ -336,6 +336,7 @@ class Create extends Component
         $divyang->aadhar = $this->aadhar;
         $divyang->i_agree_share_aadhar = 1;
         $divyang->i_agree = 1;
+        $divyang->is_multiple_disability_type =$this->is_multiple_disability_type;
         if(Auth::check()){
             $divyang->created_id = Auth::id();
         }else{
